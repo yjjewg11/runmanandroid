@@ -114,7 +114,7 @@
             </LinearLayout>
             <ImageView
                     android:layout_width="200dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="200dp"
                     android:id="@+id/imageView_identity_card_imgurl" android:layout_gravity="center_horizontal"/>
 
             <Button
@@ -126,7 +126,7 @@
 
             <ImageView
                     android:layout_width="200dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="200dp"
                     android:id="@+id/imageView_MarathonImg" android:layout_gravity="center_horizontal"/>
             <Button
                     android:layout_width="wrap_content"

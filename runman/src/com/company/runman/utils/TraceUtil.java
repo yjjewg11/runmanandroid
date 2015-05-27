@@ -2,6 +2,7 @@ package com.company.runman.utils;
 
 import android.os.Environment;
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.io.*;
 import java.lang.Thread.UncaughtExceptionHandler;
@@ -36,7 +37,9 @@ public class TraceUtil {
     }
 
     public static void traceThrowableLog(Throwable e) {
-        traceThrowableLog(WARNING, e);
+        Log.e(TAG, "traceThrowableLog", e);
+        traceThrowableLog(WARNING, e
+        );
     }
 
     public static void traceThrowableLog(String label, Throwable e) {

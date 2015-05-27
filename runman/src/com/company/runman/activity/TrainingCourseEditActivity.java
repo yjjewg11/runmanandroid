@@ -43,8 +43,8 @@ public class TrainingCourseEditActivity extends BaseActivity {
     static private String ClassName="TrainingCourseEditActivity";
 
     private TrainingCourseJsonform form;
-    private RadioButton exercise_mode1;
-    private RadioButton exercise_mode2;
+//    private RadioButton exercise_mode1;
+//    private RadioButton exercise_mode2;
     private EditText title;
     private EditText time_length;
     private EditText difficulty_degree;
@@ -77,11 +77,11 @@ public class TrainingCourseEditActivity extends BaseActivity {
             form=new TrainingCourseJsonform();
             form.setId(vo.getId());
         }
-        if(Integer.valueOf(2).equals(vo.getExercise_mode())){
-            exercise_mode2.setChecked(true);
-        }else{
-            exercise_mode1.setChecked(true);
-        }
+//        if(Integer.valueOf(2).equals(vo.getExercise_mode())){
+//            exercise_mode2.setChecked(true);
+//        }else{
+//            exercise_mode1.setChecked(true);
+//        }
         title.setText(Tool.objectToString(vo.getTitle()));
         time_length.setText(Tool.objectToString(vo.getTime_length()));
         price.setText(Tool.objectToString(vo.getPrice()));
@@ -94,16 +94,19 @@ public class TrainingCourseEditActivity extends BaseActivity {
         }
        List time_list= vo.getTime_list();
         if(time_list!=null&&time_list.size()>0){
-            baseListAdapter.setList(time_list);
+            baseListAdapter.addAll(time_list);
         }
+
+
+        Utility.setListViewHeightBasedOnChildren(listView);
        //  new TimeScheduleRelationQueryAsyncTask(mContext, Constant.BusinessData.Time_schedule_relation_type_1.toString(), vo.getId()).execute();
     }
 
     @Override
     public void setContentView() {
         setContentView(R.layout.training_course_edit_layout);
-        exercise_mode1 = (RadioButton) findViewById(R.id.exercise_mode1);
-        exercise_mode2 = (RadioButton) findViewById(R.id.exercise_mode2);
+//        exercise_mode1 = (RadioButton) findViewById(R.id.exercise_mode1);
+//        exercise_mode2 = (RadioButton) findViewById(R.id.exercise_mode2);
         difficulty_degree = (EditText) findViewById(R.id.difficulty_degree);
         context = (EditText) findViewById(R.id.context);
 
@@ -129,7 +132,7 @@ public class TrainingCourseEditActivity extends BaseActivity {
 
         baseListAdapter = new TimesScheduleRelationWeekEditItemAdapter(this);
         listView.setAdapter(baseListAdapter);
-
+        Utility.setListViewHeightBasedOnChildren(listView);
 
     };
 
@@ -159,11 +162,11 @@ public class TrainingCourseEditActivity extends BaseActivity {
             if(form==null){//创建
                 form = new TrainingCourseJsonform();
             }
-            if(exercise_mode2.isChecked()){
-                form.setExercise_mode(2);
-            }else{
-                form.setExercise_mode(1);
-            }
+//            if(exercise_mode2.isChecked()){
+//                form.setExercise_mode(2);
+//            }else{
+//                form.setExercise_mode(1);
+//            }
             try{
 
                 form.setTitle(title.getText().toString());
@@ -190,10 +193,9 @@ public class TrainingCourseEditActivity extends BaseActivity {
             new SaveAsyncTask(form,this).execute("");
         }else if(v==button_add_time){
             baseListAdapter.add(new TimeScheduleRelationVO());
+            Utility.setListViewHeightBasedOnChildren(listView);
         }
     }
-
-
 
 
     public boolean updateViewsToList() {
@@ -204,6 +206,11 @@ public class TrainingCourseEditActivity extends BaseActivity {
             tvo.setTime_period(Constant.BusinessData.Time_schedule_relation_time_period_1);
             tvo.setRelation_id(vo.getId());
             View view = listView.getChildAt(i);
+            if(view==null){
+
+                TraceUtil.traceLog(TAG+"updateViewsToList.view=null");
+                continue;
+            }
             List tmpList=new ArrayList();
             CheckBox cb = (CheckBox)view.findViewById(R.id.checkBox_week1);
             if(cb.isChecked()){

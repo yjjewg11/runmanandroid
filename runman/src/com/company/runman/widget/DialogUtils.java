@@ -54,10 +54,10 @@ public class DialogUtils {
                         public void onTimeSet(TimePicker view, int hourOfDay, int minute)
                         {
                             String hs=hourOfDay+"";
-                            if(hs.length()<10)hs="0"+hs;
+                            if(hourOfDay<10)hs="0"+hs;
                             String ms=minute+"";
-                            if(hs.length()<10)ms="0"+ms;
-                            dateView.setText(hourOfDay + ":" + minute);
+                            if(minute<10)ms="0"+ms;
+                            dateView.setText(hs + ":" + ms);
                         }
                     }, hourOfDay, minute, true);
                     timePickerDialog.show();

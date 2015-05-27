@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
@@ -326,6 +327,7 @@ public class MyTrainingCourseActivity extends BaseActivity {
                 }
 
             } catch (Exception e) {
+                Log.e(TAG, "onPostExecute:", e);
                 TraceUtil.traceThrowableLog(e);
                 DialogUtils.alertErrMsg(mContext,TAG+ "onPostExecute:" + e.getMessage());
             }

@@ -169,7 +169,7 @@ public class CoachModifyActivity extends BaseActivity {
         sex_0 = (RadioButton) findViewById(R.id.sex_0);
         sex_1 = (RadioButton) findViewById(R.id.sex_1);
 
-        name = (EditText) findViewById(R.id.name);
+//        name = (EditText) findViewById(R.id.name);
         real_name= (EditText) findViewById(R.id.real_name);;
         identity_card= (EditText) findViewById(R.id.identity_card);
 
@@ -208,7 +208,7 @@ public class CoachModifyActivity extends BaseActivity {
                 form.setSex(0);
             }
             try {
-                form.setName(name.getText().toString());
+                form.setName(vo.getName());
                 if (sex_1.isChecked()) {
                     form.setSex(1);
                 } else {
@@ -226,6 +226,7 @@ public class CoachModifyActivity extends BaseActivity {
                 new MyinfoModifyAsyncTask(form).execute("");
             } catch (Exception e) {
                 TraceUtil.traceLog(TAG+"::"+e.getMessage());
+                DialogUtils.alertErrMsg(mContext,TAG+  e.getMessage());
             }
         }else if(v ==button_uploadIdentity_card_imgurl){
             upload_file_flag=Upload_file_type_identity_card;

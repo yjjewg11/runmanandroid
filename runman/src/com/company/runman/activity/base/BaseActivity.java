@@ -190,6 +190,8 @@ public abstract class BaseActivity extends Activity implements View.OnClickListe
     }
 
 
+
+
     class ExitBroadcastReceiver extends BroadcastReceiver {
 
         @Override

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import com.company.news.form.UserLoginForm;
@@ -273,6 +274,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 finish();
 //                loginSuccessAndChangeScreenClickable();
             } catch (Exception e) {
+                Log.e(TAG, "onPostExecute:", e);
                 TraceUtil.traceThrowableLog(e);
                 DialogUtils.alertErrMsg(mContext,TAG+ "onPostExecute:" + e.getMessage());
             }

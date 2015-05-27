@@ -4,18 +4,9 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.Toast;
 import com.company.news.jsonform.TrainingPlanJsonform;
 import com.company.runman.R;
 import com.company.runman.activity.base.BaseActivity;
-import com.company.runman.datacenter.model.BaseResultEntity;
-import com.company.runman.net.HttpControl;
-import com.company.runman.net.HttpReturn;
-import com.company.runman.net.interfaces.IResponse;
-import com.company.runman.net.request.DefaultRequest;
-import com.company.runman.utils.AbstractAsyncTask;
-import com.company.runman.utils.Constant;
-import com.company.runman.widget.DialogUtils;
 
 /**
  * Created by LMQ on 14-9-3.
@@ -41,8 +32,8 @@ public class CoachListActivity extends BaseActivity {
     @Override
     public void initView() {
         setHeaderTitle("教练列表");
-        caach_course_detail_btn = findViewById(R.id.caach_course_detail_btn);
-        caach_course_detail_btn.setOnClickListener(this);
+      //  caach_course_detail_btn = findViewById(R.id.caach_course_detail_btn);
+   //     caach_course_detail_btn.setOnClickListener(this);
     }
 
     @Override
