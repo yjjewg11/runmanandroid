@@ -4,8 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by EdisonZhao on 14-8-21.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-8-21.
+ * Email:
  */
 public class MonitorStatsEventDetailEntity extends BaseResultEntity implements Parcelable {
 

@@ -1,8 +1,8 @@
 package com.company.runman.datacenter.model;
 
 /**
- * Created by EdisonZhao on 14-8-6.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-8-6.
+ * Email:
  */
 public class MonitorStationEntity extends SortBaseEntity {
 

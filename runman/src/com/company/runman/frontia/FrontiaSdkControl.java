@@ -15,8 +15,8 @@ import static com.baidu.frontia.api.FrontiaAuthorization.MediaType.QQWEIBO;
 import static com.baidu.frontia.api.FrontiaAuthorization.MediaType.SINAWEIBO;
 
 /**
- * Created by EdisonZhao on 14-7-24.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-7-24.
+ * Email:
  */
 public class FrontiaSdkControl {
 

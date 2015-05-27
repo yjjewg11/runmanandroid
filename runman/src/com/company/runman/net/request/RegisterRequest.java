@@ -13,8 +13,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Created by EdisonZhao on 14-9-4.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-9-4.
+ * Email:
  */
 public class RegisterRequest extends IRequest {
 

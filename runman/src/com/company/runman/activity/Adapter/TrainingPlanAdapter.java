@@ -14,8 +14,8 @@ import com.company.runman.utils.TraceUtil;
 import java.util.List;
 
 /**
- * Created by EdisonZhao on 14-11-3.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-11-3.
+ * Email:
  */
 public class TrainingPlanAdapter extends DefaultAdapter {
     private Context context;

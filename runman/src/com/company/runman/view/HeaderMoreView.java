@@ -8,8 +8,8 @@ import android.widget.PopupWindow;
 import com.company.runman.R;
 
 /**
- * Created by EdisonZhao on 14/12/19.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14/12/19.
+ * Email:
  */
 public class HeaderMoreView extends LinearLayout implements View.OnClickListener{
 

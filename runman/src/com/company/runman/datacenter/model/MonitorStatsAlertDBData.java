@@ -3,8 +3,8 @@ package com.company.runman.datacenter.model;
 import java.io.Serializable;
 
 /**
- * Created by EdisonZhao on 14-10-23.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-10-23.
+ * Email:
  */
 public class MonitorStatsAlertDBData extends BaseResultEntity implements Serializable {
 

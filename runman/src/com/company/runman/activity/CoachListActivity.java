@@ -18,8 +18,8 @@ import com.company.runman.utils.Constant;
 import com.company.runman.widget.DialogUtils;
 
 /**
- * Created by EdisonZhao on 14-9-3.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-9-3.
+ * Email:
  */
 public class CoachListActivity extends BaseActivity {
     static private String ClassName="CoachListActivity";

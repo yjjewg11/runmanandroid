@@ -4,9 +4,10 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-
+    <com.company.runman.view.HeaderView android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"/>
     <ScrollView android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="fill_parent"
                 android:background="@color/monitor_bg_color">
         <LinearLayout style="@style/CommonBackgroundStyle">
             <RadioGroup
@@ -126,14 +127,19 @@
                         android:id="@+id/price" android:editable="true" android:enabled="true" android:text="50"
                         android:hint="价格"/>
             </LinearLayout>
+            <ListView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/timeScheduleRelationList" android:choiceMode="multipleChoice"/>
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="添加时间"
+                    android:id="@+id/button_add_time" android:layout_gravity="bottom"/>
             <TextView
                     android:text="保存"
                     android:id="@+id/save_btn" android:clickable="true" android:layout_width="fill_parent"
                       style="@style/CommonButtonStyle"/>
         </LinearLayout>
     </ScrollView>
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView" android:layout_gravity="center_horizontal"/>
 </LinearLayout>

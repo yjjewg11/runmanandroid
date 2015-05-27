@@ -40,8 +40,8 @@ import org.json.JSONObject;
 import java.io.File;
 
 /**
- * Created by EdisonZhao on 14-9-3.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-9-3.
+ * Email:
  */
 public class MyinfoModifyActivity extends BaseActivity {
     static private String ClassName="MyinfoModifyActivity";

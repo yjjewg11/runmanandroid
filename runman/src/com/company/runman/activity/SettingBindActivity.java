@@ -16,8 +16,8 @@ import com.company.runman.utils.TraceUtil;
 import static com.baidu.frontia.api.FrontiaAuthorization.MediaType.*;
 
 /**
- * Created by EdisonZhao on 14-7-24.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-7-24.
+ * Email:
  */
 public class SettingBindActivity extends BaseActivity {
 

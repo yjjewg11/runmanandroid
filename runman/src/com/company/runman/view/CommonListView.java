@@ -10,8 +10,8 @@ import com.company.runman.R;
 import com.company.runman.activity.Adapter.BaseListAdapter;
 
 /**
- * Created by EdisonZhao on 14-9-11.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-9-11.
+ * Email:
  */
 public class CommonListView extends RelativeLayout {
 

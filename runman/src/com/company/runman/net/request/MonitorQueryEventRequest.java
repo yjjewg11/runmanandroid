@@ -6,8 +6,8 @@ import com.company.runman.net.HttpReturn;
 import com.company.runman.utils.Constant;
 
 /**
- * Created by EdisonZhao on 14-8-21.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-8-21.
+ * Email:
  * 监控事件查询
  */
 public class MonitorQueryEventRequest extends MonitorBaseRequest {

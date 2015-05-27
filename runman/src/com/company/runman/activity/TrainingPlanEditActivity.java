@@ -28,8 +28,8 @@ import com.company.runman.widget.DialogUtils;
 import org.apache.commons.lang.StringUtils;
 
 /**
- * Created by EdisonZhao on 14-9-3.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-9-3.
+ * Email:
  */
 public class TrainingPlanEditActivity extends BaseActivity {
     static private String ClassName="TrainingPlanEditActivity";

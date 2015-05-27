@@ -1,8 +1,8 @@
 package com.company.runman.comman.model;
 
 /**
- * Created by EdisonZhao on 14/11/24.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14/11/24.
+ * Email:
  */
 public class TimeSelectedEntity {
     private int arrive_year;

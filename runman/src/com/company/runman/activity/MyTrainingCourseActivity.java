@@ -9,13 +9,14 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import com.company.news.jsonform.TimeScheduleRelationJsonform;
 import com.company.news.query.NSearchContion;
+import com.company.news.vo.TimeScheduleRelationVO;
 import com.company.news.vo.TrainingCourseVO;
-import com.company.news.vo.TrainingPlanVO;
+import com.company.news.vo.TrainingCourseVO;
 import com.company.news.vo.UserInfoReturn;
 import com.company.runman.R;
 import com.company.runman.activity.Adapter.MyTrainingCourseAdapter;
-import com.company.runman.activity.Adapter.TrainingPlanAdapter;
 import com.company.runman.activity.base.BaseActivity;
 import com.company.runman.cache.ImgDownCache;
 import com.company.runman.datacenter.model.BaseResultEntity;
@@ -28,10 +29,14 @@ import com.company.runman.utils.*;
 import com.company.runman.widget.DialogUtils;
 import com.company.runman.widget.PullToRefreshListView;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -99,9 +104,9 @@ public class MyTrainingCourseActivity extends BaseActivity {
                         TrainingCourseVO tmp = (TrainingCourseVO) o;
                         //加载详细页面
 //
-//                        Intent intent = new Intent(mContext, TrainingPlanDetailActivity.class);
+//                        Intent intent = new Intent(mContext, TrainingCourseDetailActivity.class);
 //                        startActivity(intent);
-                        IntentUtils.startTrainingCourseEditActivityActivity(mContext,tmp);
+                     new DetailTrainingCourseAsyncTask(tmp.getId().toString()).execute();
                        // showProgress("加载数据");
                        // new EditTrainingCourseAsyncTask(tmp.getId().toString()).execute();
 
@@ -146,8 +151,8 @@ public class MyTrainingCourseActivity extends BaseActivity {
 
     @Override
     public void initData() {
-//        HashMap<String, List<TrainingPlanVO>> mEventMap
-//                = (HashMap<String, List<TrainingPlanVO>>) getIntent().getSerializableExtra(Constant.ExtraKey.EXTRA_COMMON_ARRAY_KEY);
+//        HashMap<String, List<TrainingCourseVO>> mEventMap
+//                = (HashMap<String, List<TrainingCourseVO>>) getIntent().getSerializableExtra(Constant.ExtraKey.EXTRA_COMMON_ARRAY_KEY);
 //        String typeId = getIntent().getStringExtra(Constant.ExtraKey.EXTRA_COMMON_KEY);
 
 
@@ -166,7 +171,7 @@ public class MyTrainingCourseActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_add_training_course:
-                IntentUtils.startTrainingCourseEditActivityActivity(mContext,null);
+                IntentUtils.startTrainingCourseEditActivity(mContext, null);
                 break;
 
         }
@@ -175,6 +180,72 @@ public class MyTrainingCourseActivity extends BaseActivity {
     }
 
 
+    /**
+     * 编辑训练计划
+     */
+    private class DetailTrainingCourseAsyncTask extends AbstractAsyncTask<String, Void, Object> {
+        private String id;
+
+        public DetailTrainingCourseAsyncTask(String id) {
+            this.id = id;
+        }
+
+        @Override
+        protected Object doInBackground(String[] params) {
+
+            String url = "rest/trainingCourse/{uuid}.json";
+            url = url.replace("{uuid}", id);
+            DefaultRequest request = new DefaultRequest(mContext, url, Constant.RequestCode.REQUEST_GET);
+
+            HttpReturn httpReturn = HttpControl.execute(request, mContext);
+
+            IResponse response = new IResponse();
+            return response.parseFrom(httpReturn);
+        }
+
+        @Override
+        protected void onPostExecute(Object result) {
+            dismissProgress();
+            try {
+                super.onPostExecute(result);
+                BaseResultEntity resultEntity = (BaseResultEntity) result;
+                if (!Constant.ResponseData.STATUS_SUCCESS.equals(resultEntity.getStatus())) {
+                    DialogUtils.alertErrMsg(mContext, resultEntity.getResultMsg());
+                    return;
+                }
+                JSONObject jsonObject = (JSONObject) resultEntity.getResultObject();
+                String dataArrStr = jsonObject.optString(Constant.ResponseData.DATA);
+                String time_list = jsonObject.optString("time_list");
+
+                TrainingCourseVO vo = (TrainingCourseVO) new GsonUtils().stringToObject(dataArrStr, TrainingCourseVO.class);
+                Gson gson = new GsonUtils().getGson();
+                if(time_list!=null){
+
+                    JsonParser parser = new JsonParser();
+                    JsonArray Jarray = parser.parse(time_list).getAsJsonArray();
+                    List<TimeScheduleRelationVO> tmpList  = new ArrayList<TimeScheduleRelationVO>();
+                    for(JsonElement obj : Jarray )
+                    {
+                        TimeScheduleRelationVO cse = gson.fromJson( obj , TimeScheduleRelationVO.class);
+                        tmpList.add(cse);
+                    }
+
+//                    time_list=time_list.replace("\\", "");
+//                    time_list=time_list.substring(1, time_list.length()-1); //去掉头尾引号。
+//                    List<TimeScheduleRelationVO> tmpList = gson.fromJson(dataArrStr, new TypeToken<List<TimeScheduleRelationVO>>() {
+//                    }.getType());
+                    vo.setTime_list(tmpList);
+                }
+
+//                IntentUtils.startTrainingCourseEditActivity(mContext, vo);
+                IntentUtils.startTrainingCourseEditActivity(mContext, vo);
+            } catch (Exception e) {
+                TraceUtil.traceThrowableLog(e);
+                DialogUtils.alertErrMsg(mContext,TAG+ "onPostExecute:" + e.getMessage());
+            }
+
+        }
+    }
 
     /**
      * 查询训练计划

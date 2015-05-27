@@ -136,10 +136,22 @@ public class Constant {
         public static final String MESSAGE = "message";
         public static final String DATA = "data";
         public static final String ResMsg = "ResMsg";
+        public static final String DATA_ID ="data_id";
     }
     public static final class Query {
         static public  Integer Operate_Refresh=0;//刷新操作
         static public  Integer Operate_LoadMore=1;//加载更多操作
     }
 
+    /**
+     * 业务数据常量
+     */
+    public static final class BusinessData {
+        //类型。1：关联课程时段。2：关联教练可授课时间段
+        static public  Integer Time_schedule_relation_type_1=1;
+        static public  Integer Time_schedule_relation_type_2=2;
+//[必填]时间周期设置。。1：表示每周。2：表示每月
+        static public  Integer Time_schedule_relation_time_period_1=1;
+        static public  Integer Time_schedule_relation_time_period_2=2;
+    }
 }

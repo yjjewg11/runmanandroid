@@ -19,8 +19,8 @@ import com.company.runman.widget.DialogUtils;
 import org.apache.commons.lang.StringUtils;
 
 /**
- * Created by EdisonZhao on 14-9-3.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-9-3.
+ * Email:
  */
 public class TrainingPlanDetailActivity extends BaseActivity {
     static private String ClassName="TrainingPlanDetailActivity";
@@ -99,45 +99,4 @@ public class TrainingPlanDetailActivity extends BaseActivity {
 //        super.finish();
 //    }
 
-    private class SaveAsyncTask extends AbstractAsyncTask<String, Void, Object> {
-
-        private TrainingPlanJsonform form;
-
-        protected SaveAsyncTask(TrainingPlanJsonform form) {
-            this.form = form;
-        }
-
-        @Override
-        protected Object doInBackground(String[] params) {
-            String url="rest/trainingPlan/save.json";
-            DefaultRequest request= new DefaultRequest(mContext,url,Constant.RequestCode.REQUEST_POST);
-            request.setData(form);
-            HttpReturn httpReturn = HttpControl.execute(request, mContext);
-            IResponse response = new IResponse();
-            return response.parseFrom(httpReturn);
-            //保存是否保存密码的选项
-           // return CategoryDataProvider.getInstance().register(mContext, form);
-        }
-
-        @Override
-        protected void onPostExecute(Object result) {
-            dismissProgress();
-            super.onPostExecute(result);
-            if(result == null) {
-                DialogUtils.alertErrMsg(mContext,"服务器未知错误!");
-            } else {
-                BaseResultEntity responseEntity = (BaseResultEntity) result;
-
-                if (Constant.ResponseData.STATUS_SUCCESS.equals(responseEntity.getStatus()) ){
-                    Toast.makeText(mContext, responseEntity.getResultMsg(), Toast.LENGTH_SHORT).show();
-                    DialogUtils.alertErrMsg(mContext,responseEntity.getResultMsg());
-                    Intent intent = new Intent(mContext, MyInfoActivity.class);
-                    startActivity(intent);
-                    finish();
-                }else{
-                    DialogUtils.alertErrMsg(mContext,responseEntity.getResultMsg());
-                }
-            }
-        }
-    }
 }

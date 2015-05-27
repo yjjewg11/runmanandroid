@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by EdisonZhao on 14-8-7.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-8-7.
+ * Email:
  */
 public class MonitorHostEntity extends BaseResultEntity implements Serializable {
 

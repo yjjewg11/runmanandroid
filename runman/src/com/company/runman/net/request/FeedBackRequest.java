@@ -12,8 +12,8 @@ import org.json.JSONObject;
 import java.util.Set;
 
 /**
- * Created by EdisonZhao on 14-10-24.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-10-24.
+ * Email:
  */
 public class FeedBackRequest extends IRequest {
 

@@ -1,15 +1,21 @@
 package com.company.runman.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.Toast;
+import android.widget.*;
 import com.company.news.jsonform.TrainingCourseJsonform;
+import com.company.news.query.NSearchContion;
+import com.company.news.query.TimeScheduleRelationSearchContion;
 import com.company.news.validate.CommonsValidate;
+import com.company.news.vo.TimeScheduleRelationVO;
 import com.company.news.vo.TrainingCourseVO;
+import com.company.news.vo.TrainingPlanVO;
 import com.company.runman.R;
+import com.company.runman.activity.Adapter.TimesScheduleRelationWeekEditItemAdapter;
+import com.company.runman.activity.Adapter.TrainingPlanAdapter;
 import com.company.runman.activity.base.BaseActivity;
 import com.company.runman.datacenter.model.BaseResultEntity;
 import com.company.runman.net.HttpControl;
@@ -18,11 +24,20 @@ import com.company.runman.net.interfaces.IResponse;
 import com.company.runman.net.request.DefaultRequest;
 import com.company.runman.utils.*;
 import com.company.runman.widget.DialogUtils;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.apache.commons.lang.StringUtils;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
- * Created by EdisonZhao on 14-9-3.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-9-3.
+ * Email:
  */
 public class TrainingCourseEditActivity extends BaseActivity {
     static private String ClassName="TrainingCourseEditActivity";
@@ -38,6 +53,11 @@ public class TrainingCourseEditActivity extends BaseActivity {
     private EditText price;
     private View save_btn;
 
+    private Button button_add_time;
+  //  private LinkedList mListItems;
+    private TimesScheduleRelationWeekEditItemAdapter baseListAdapter;
+    public static ListView listView;
+    private TrainingCourseVO vo=null;
 
 
     @Override
@@ -48,7 +68,7 @@ public class TrainingCourseEditActivity extends BaseActivity {
     @Override
     public void initData() {
         Intent intent = this.getIntent();
-        TrainingCourseVO vo=(TrainingCourseVO)intent.getSerializableExtra(Constant.ResponseData.DATA);
+         vo=(TrainingCourseVO)intent.getSerializableExtra(Constant.ResponseData.DATA);
         if(vo==null){
             vo=new TrainingCourseVO();
           
@@ -68,8 +88,15 @@ public class TrainingCourseEditActivity extends BaseActivity {
         difficulty_degree.setText(Tool.objectToString(vo.getDifficulty_degree()));
        place.setText(Tool.objectToString(vo.getPlace()));
         context.setText(Tool.objectToString(vo.getContext()));
-        
 
+        if(vo.getId()==null){
+            return;
+        }
+       List time_list= vo.getTime_list();
+        if(time_list!=null&&time_list.size()>0){
+            baseListAdapter.setList(time_list);
+        }
+       //  new TimeScheduleRelationQueryAsyncTask(mContext, Constant.BusinessData.Time_schedule_relation_type_1.toString(), vo.getId()).execute();
     }
 
     @Override
@@ -88,6 +115,21 @@ public class TrainingCourseEditActivity extends BaseActivity {
 
         save_btn = findViewById(R.id.save_btn);
         save_btn.setOnClickListener(this);
+
+        button_add_time =(Button)findViewById(R.id.button_add_time);
+        button_add_time.setOnClickListener(this);
+
+        //周期列表
+        listView=(ListView)findViewById(R.id.timeScheduleRelationList);
+
+
+
+      //  mListItems = new LinkedList<String>();
+        // mListItems.addAll(Arrays.asList(mStrings));
+
+        baseListAdapter = new TimesScheduleRelationWeekEditItemAdapter(this);
+        listView.setAdapter(baseListAdapter);
+
 
     };
 
@@ -138,10 +180,73 @@ public class TrainingCourseEditActivity extends BaseActivity {
             }
 
             showProgress(getString(R.string.progress_text));
-            new SaveAsyncTask(form).execute("");
+
+            if(baseListAdapter.getList().size()==0){
+                Toast.makeText(mContext,"没有设置时间！", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            updateViewsToList();
+            form.setTime_list(baseListAdapter.getList());
+            new SaveAsyncTask(form,this).execute("");
+        }else if(v==button_add_time){
+            baseListAdapter.add(new TimeScheduleRelationVO());
         }
     }
 
+
+
+
+    public boolean updateViewsToList() {
+        try{
+        for(int i=0;i<this.baseListAdapter.getList().size();i++){
+            TimeScheduleRelationVO tvo=(TimeScheduleRelationVO)this.baseListAdapter.getList().get(i);
+            tvo.setType(Constant.BusinessData.Time_schedule_relation_type_1);
+            tvo.setTime_period(Constant.BusinessData.Time_schedule_relation_time_period_1);
+            tvo.setRelation_id(vo.getId());
+            View view = listView.getChildAt(i);
+            List tmpList=new ArrayList();
+            CheckBox cb = (CheckBox)view.findViewById(R.id.checkBox_week1);
+            if(cb.isChecked()){
+                tmpList.add("1");
+            }
+            cb = (CheckBox)view.findViewById(R.id.checkBox_week2);
+            if(cb.isChecked()){
+                tmpList.add("2");
+            }
+            cb = (CheckBox)view.findViewById(R.id.checkBox_week3);
+            if(cb.isChecked()){
+                tmpList.add("3");
+            }
+            cb = (CheckBox)view.findViewById(R.id.checkBox_week4);
+            if(cb.isChecked()){
+                tmpList.add("4");
+            }
+            cb = (CheckBox)view.findViewById(R.id.checkBox_week5);
+            if(cb.isChecked()){
+                tmpList.add("5");
+            }
+            cb = (CheckBox)view.findViewById(R.id.checkBox_week6);
+            if(cb.isChecked()){
+                tmpList.add("6");
+            }
+            cb = (CheckBox)view.findViewById(R.id.checkBox_week7);
+            if(cb.isChecked()){
+                tmpList.add("7");
+            }
+            tvo.setDays(StringUtils.join(tmpList,","));
+            tvo.setStart_time (((EditText)view.findViewById(R.id.start_time)).getText().toString());
+            tvo.setEnd_time (((EditText)view.findViewById(R.id.end_time)).getText().toString());
+
+        }
+
+        }catch (Exception e){
+            TraceUtil.traceThrowableLog(e);
+            DialogUtils.alertErrMsg(mContext, TAG + "onPostExecute:" + e.getMessage());
+            return false;
+        }
+
+        return true;
+    }
     @Override
     public void finish() {
         Intent intent = new Intent(mContext, MyTrainingCourseActivity.class);
@@ -153,9 +258,12 @@ public class TrainingCourseEditActivity extends BaseActivity {
 
         private TrainingCourseJsonform form;
 
-        protected SaveAsyncTask(TrainingCourseJsonform form) {
+        protected SaveAsyncTask(TrainingCourseJsonform form, TrainingCourseEditActivity trainingCourseEditActivity) {
             this.form = form;
+            this.trainingCourseEditActivity=trainingCourseEditActivity;
         }
+
+        private TrainingCourseEditActivity trainingCourseEditActivity;
 
         @Override
         protected Object doInBackground(String[] params) {
@@ -171,6 +279,9 @@ public class TrainingCourseEditActivity extends BaseActivity {
 
         @Override
         protected void onPostExecute(Object result) {
+            try{
+
+
             dismissProgress();
             super.onPostExecute(result);
             if(result == null) {
@@ -180,12 +291,85 @@ public class TrainingCourseEditActivity extends BaseActivity {
 
                 if (Constant.ResponseData.STATUS_SUCCESS.equals(responseEntity.getStatus()) ){
                     Toast.makeText(mContext, responseEntity.getResultMsg(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(mContext, MyTrainingCourseActivity.class);
-                    startActivity(intent);
-                    finish();
+                    JSONObject jsonObject = (JSONObject) responseEntity.getResultObject();
+                    String data_id = jsonObject.optString(Constant.ResponseData.DATA_ID);
+                    vo.setId(Long.valueOf(data_id));
+                    //先保存课程，在保存关联时段
+
+
+                  //  Intent intent = new Intent(mContext, MyTrainingCourseActivity.class);
+                  //  startActivity(intent);
+                  //  finish();
                 }else{
                     DialogUtils.alertErrMsg(mContext,responseEntity.getResultMsg());
                 }
+            }
+            } catch (Exception e) {
+                Log.e("TAG",e.getMessage());
+                TraceUtil.traceThrowableLog(e);
+                DialogUtils.alertErrMsg(mContext,e.getMessage());
+                DialogUtils.alertErrMsg(mContext,TAG+ " onPostExecute:" + e.getMessage());
+            }
+        }
+
+    }
+
+
+    /**
+     * 查询训练计划
+     */
+    private class TimeScheduleRelationQueryAsyncTask extends AbstractAsyncTask<String, Void, Object> {
+        private Long relation_id;
+        private Integer type;
+        private Context context;
+        private TimeScheduleRelationSearchContion nSearchContion=new TimeScheduleRelationSearchContion();
+      //  private int operate;
+
+        public TimeScheduleRelationQueryAsyncTask(Context context,String type,Long relation_id) {
+            this.context = context;
+            nSearchContion.setRelation_id(relation_id);
+            nSearchContion.setType(type);
+        }
+        @Override
+        protected Object doInBackground(String[] params) {
+
+            String url = "rest/timeScheduleRelation/query.json";
+            DefaultRequest request = new DefaultRequest(mContext, url, Constant.RequestCode.REQUEST_GET);
+            request.setParaObj(nSearchContion);
+            HttpReturn httpReturn = HttpControl.execute(request, mContext);
+            IResponse response = new IResponse();
+            return response.parseFrom(httpReturn);
+        }
+
+        @Override
+        protected void onPostExecute(Object result) {
+            //恢复按钮文字为登录
+
+
+
+            try {
+                super.onPostExecute(result);
+                BaseResultEntity resultEntity = (BaseResultEntity) result;
+                if (!Constant.ResponseData.STATUS_SUCCESS.equals(resultEntity.getStatus())) {
+                    DialogUtils.alertErrMsg(mContext, resultEntity.getResultMsg());
+                    return;
+                }
+                JSONObject jsonObject = (JSONObject) resultEntity.getResultObject();
+                String   dataArrStr = jsonObject.optString(Constant.ResponseData.DATA);
+                Gson gson = new GsonUtils().getGson();
+                List<TimeScheduleRelationVO> list = gson.fromJson(dataArrStr, new TypeToken<List<TimeScheduleRelationVO>>() {
+                }.getType());
+                baseListAdapter.setList(list);
+
+                if(list.size()==0){
+                    Toast.makeText(mContext, R.string.empty_data_text, Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(mContext, "加载"+list.size()+"条", Toast.LENGTH_SHORT).show();
+                }
+
+            } catch (Exception e) {
+                TraceUtil.traceThrowableLog(e);
+                DialogUtils.alertErrMsg(mContext,TAG+ "onPostExecute:" + e.getMessage());
             }
         }
     }

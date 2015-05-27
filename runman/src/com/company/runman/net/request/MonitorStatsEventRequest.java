@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by EdisonZhao on 14-8-21.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-8-21.
+ * Email:
  * 监控事件统计
  */
 public class MonitorStatsEventRequest extends MonitorBaseRequest {

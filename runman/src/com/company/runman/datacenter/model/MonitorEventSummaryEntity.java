@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by EdisonZhao on 14-8-22.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-8-22.
+ * Email:
  */
 public class MonitorEventSummaryEntity extends BaseResultEntity implements Serializable {
     private long time;

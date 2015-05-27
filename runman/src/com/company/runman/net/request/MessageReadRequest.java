@@ -10,8 +10,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Created by EdisonZhao on 14-8-5.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-8-5.
+ * Email:
  */
 public class MessageReadRequest extends IRequest {
 

@@ -13,8 +13,8 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * Created by EdisonZhao on 14-8-7.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-8-7.
+ * Email:
  * 获取设备详细信息
  */
 public class MonitorHostDetailRequest extends MonitorBaseRequest {

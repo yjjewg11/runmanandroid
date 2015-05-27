@@ -16,8 +16,8 @@ import org.json.JSONObject;
 import java.util.*;
 
 /**
- * Created by EdisonZhao on 14-8-6.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-8-6.
+ * Email:
  * 基础数据构造基类
  */
 public class MonitorBaseRequest extends IRequest {

@@ -11,8 +11,8 @@ import com.company.runman.utils.LogHelper;
 import org.json.JSONObject;
 
 /**
- * Created by EdisonZhao on 14-8-11.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-8-11.
+ * Email:
  */
 public class CheckUpgradeRequest extends IRequest {
 

@@ -6,8 +6,8 @@ import com.company.runman.datacenter.model.WebPageEntity;
 import java.util.List;
 
 /**
- * Created by EdisonZhao on 14-8-5.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-8-5.
+ * Email:
  */
 public interface IWebPageDao {
 

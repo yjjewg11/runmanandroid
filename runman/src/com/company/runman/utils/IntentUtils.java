@@ -40,7 +40,7 @@ public class IntentUtils {
      * @param mContext
      * @param data
      */
-    public static void startTrainingCourseEditActivityActivity(Context mContext,Serializable data) {
+    public static void startTrainingCourseEditActivity(Context mContext,Serializable data) {
         Intent intent = new Intent(mContext, TrainingCourseEditActivity.class);
         if(data!=null){
             Bundle bundle = new Bundle();

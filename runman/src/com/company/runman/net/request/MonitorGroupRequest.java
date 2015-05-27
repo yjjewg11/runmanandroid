@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by EdisonZhao on 14-9-5.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-9-5.
+ * Email:
  */
 public class MonitorGroupRequest extends MonitorBaseRequest {
 

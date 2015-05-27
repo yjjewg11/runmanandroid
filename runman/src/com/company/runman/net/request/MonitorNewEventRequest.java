@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by EdisonZhao on 14-8-8.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-8-8.
+ * Email:
  * 获取最新事件
  */
 public class MonitorNewEventRequest extends MonitorBaseRequest {

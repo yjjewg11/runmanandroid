@@ -10,8 +10,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Created by EdisonZhao on 14-8-21.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-8-21.
+ * Email:
  * 电视台设备统计接口
  */
 public class MonitorHostStatsRequest extends MonitorBaseRequest {

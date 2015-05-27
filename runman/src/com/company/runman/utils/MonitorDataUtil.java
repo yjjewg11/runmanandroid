@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by EdisonZhao on 14-8-8.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-8-8.
+ * Email:
  */
 public class MonitorDataUtil {
 

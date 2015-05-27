@@ -18,8 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by EdisonZhao on 14-10-23.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-10-23.
+ * Email:
  */
 public class MonitorStatsListRequest extends MonitorBaseRequest {
 

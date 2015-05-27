@@ -7,8 +7,8 @@ import android.widget.LinearLayout;
 import com.company.runman.R;
 
 /**
- * Created by EdisonZhao on 14-8-26.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-8-26.
+ * Email:
  */
 public class SearchHeaderView extends LinearLayout {
 

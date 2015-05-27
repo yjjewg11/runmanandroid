@@ -22,8 +22,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by EdisonZhao on 14-8-11.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-8-11.
+ * Email:
  */
 public class CheckVersionActivity extends BaseActivity {
 

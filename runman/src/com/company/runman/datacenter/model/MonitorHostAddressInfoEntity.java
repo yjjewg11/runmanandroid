@@ -3,8 +3,8 @@ package com.company.runman.datacenter.model;
 import java.io.Serializable;
 
 /**
- * Created by EdisonZhao on 14-8-7.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-8-7.
+ * Email:
  */
 public class MonitorHostAddressInfoEntity extends BaseResultEntity implements Serializable {
 

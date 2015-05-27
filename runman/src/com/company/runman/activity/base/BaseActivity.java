@@ -28,7 +28,7 @@ import com.company.runman.widget.MyProgressDialog;
 
 /**
  * Created by Edison on 2014/6/4.
- * Email:zhaoliangyu@sobey.com
+ * Email:
  */
 public abstract class BaseActivity extends Activity implements View.OnClickListener{
     protected static final String TAG = "BaseActivity";
@@ -158,7 +158,7 @@ public abstract class BaseActivity extends Activity implements View.OnClickListe
      * @param title
      */
     public void setHeaderTitle(String title) {
-        ((TextView)findViewById(R.id.headerTitle)).setText(title);
+       if(findViewById(R.id.headerTitle)!=null) ((TextView)findViewById(R.id.headerTitle)).setText(title);
     }
 
     public void setHeaderTitle(int titleId) {

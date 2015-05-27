@@ -3,8 +3,8 @@ package com.company.runman.datacenter.model;
 import java.io.Serializable;
 
 /**
- * Created by EdisonZhao on 14-8-8.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-8-8.
+ * Email:
  */
 public class MonitorHostEventEntity extends BaseResultEntity implements Serializable {
     private String eventID;//事件唯一ID

@@ -11,8 +11,8 @@ import com.company.runman.datacenter.model.KeywordEntity;
 import com.company.runman.utils.AbstractAsyncTask;
 
 /**
- * Created by EdisonZhao on 14-11-3.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-11-3.
+ * Email:
  */
 public class KeywordAdapter extends BaseListAdapter<KeywordEntity> {
 

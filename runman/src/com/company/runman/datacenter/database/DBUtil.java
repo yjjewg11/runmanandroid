@@ -11,8 +11,8 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Created by EdisonZhao on 14-7-28.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-7-28.
+ * Email:
  */
 public class DBUtil {
     private final static String TAG = "DBUtil";

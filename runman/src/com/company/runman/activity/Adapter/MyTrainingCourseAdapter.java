@@ -15,8 +15,8 @@ import com.company.runman.utils.TraceUtil;
 import java.util.List;
 
 /**
- * Created by EdisonZhao on 14-11-3.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-11-3.
+ * Email:
  */
 public class MyTrainingCourseAdapter extends DefaultAdapter {
     private Context context;
@@ -49,7 +49,7 @@ public class MyTrainingCourseAdapter extends DefaultAdapter {
             convertView=LayoutInflater.from(context).inflate(R.layout.my_traininng_course_item, null);
             HolderView h=new HolderView();
             h.title=(TextView)convertView.findViewById(R.id.title);
-            h.exercise_mode=(TextView)convertView.findViewById(R.id.exercise_mode);
+          //  h.exercise_mode=(TextView)convertView.findViewById(R.id.exercise_mode);
 
             h.price=(TextView)convertView.findViewById(R.id.price);
 //            h.status=(TextView)convertView.findViewById(R.id.status);
@@ -58,11 +58,11 @@ public class MyTrainingCourseAdapter extends DefaultAdapter {
 
             try{
                 h.title.setText(d.getTitle());
-                if(Integer.valueOf(2).equals(d.getExercise_mode())){
-                    h.exercise_mode.setText("马拉松");
-                }else{
-                    h.exercise_mode.setText("普通跑步");
-                }
+//                if(Integer.valueOf(2).equals(d.getExercise_mode())){
+//                    h.exercise_mode.setText("马拉松");
+//                }else{
+//                    h.exercise_mode.setText("普通跑步");
+//                }
 
 
                 h.price.setText("价格:"+d.getPrice());
@@ -78,7 +78,7 @@ public class MyTrainingCourseAdapter extends DefaultAdapter {
 
     class HolderView {
         private TextView title;
-        private TextView exercise_mode;
+      //  private TextView exercise_mode;
         private TextView price;
         private TextView status;
 

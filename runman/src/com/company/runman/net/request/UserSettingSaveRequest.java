@@ -12,8 +12,8 @@ import org.json.JSONObject;
 import java.util.Set;
 
 /**
- * Created by EdisonZhao on 14/12/18.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14/12/18.
+ * Email:
  */
 public class UserSettingSaveRequest extends IRequest {
 

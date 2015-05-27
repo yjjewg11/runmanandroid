@@ -11,8 +11,8 @@ import com.company.runman.utils.LogHelper;
 import com.company.runman.utils.SobeyHandlerCenter;
 
 /**
- * Created by EdisonZhao on 14-8-5.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-8-5.
+ * Email:
  */
 public class ApplicationInitTask {
 

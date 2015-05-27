@@ -15,8 +15,8 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by EdisonZhao on 14-8-6.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-8-6.
+ * Email:
  * 获取电视台列表
  */
 public class MonitorStationRequest extends MonitorBaseRequest {

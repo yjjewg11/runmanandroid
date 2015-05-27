@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.Map;
 
 /**
- * Created by EdisonZhao on 14-8-21.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-8-21.
+ * Email:
  */
 public class MonitorStatsEventRequestEntity extends BaseResultEntity implements Serializable {
 

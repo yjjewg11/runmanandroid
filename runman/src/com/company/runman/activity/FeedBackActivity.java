@@ -14,8 +14,8 @@ import com.company.runman.utils.Constant;
 import com.company.runman.utils.AbstractAsyncTask;
 
 /**
- * Created by EdisonZhao on 14-10-24.
- * Email:zhaoliangyu@sobey.com
+ * Created by LMQ on 14-10-24.
+ * Email:
  */
 public class FeedBackActivity extends BaseActivity {
 
