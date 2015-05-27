@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <com.company.runman.view.AnimationLayout
+            android:id="@+id/mv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <com.company.runman.view.SettingWindowView style="@style/HeaderViewStyle"
+                                                      android:id="@+id/left"/>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
+                      android:id="@+id/right"
+                      android:orientation="vertical">
+            <com.company.runman.view.HeaderView android:layout_width="wrap_content"
+                                                   android:layout_height="wrap_content"/>
+            <include layout="@layout/main_middle_layout"/>
+        </LinearLayout>
+    </com.company.runman.view.AnimationLayout>
+</LinearLayout>
+

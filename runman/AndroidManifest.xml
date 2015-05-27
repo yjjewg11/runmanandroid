@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.company.runman"
+          android:versionCode="1"
+          android:versionName="1.0.1">
+
+    <!-- code scan -->
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+    <!-- end user private data -->
+    <!-- network -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <!-- end network -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION"/>
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
+
+
+    <supports-screens
+            android:anyDensity="true"
+            android:largeScreens="true"
+            android:normalScreens="true"
+            android:resizeable="true"
+            android:smallScreens="true"/>
+
+    <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="19"/>
+
+    <application android:label="@string/app_name" android:icon="@drawable/app_icon"
+                 android:theme="@style/AppTheme"
+                 android:allowTaskReparenting="true"
+                 android:alwaysRetainTaskState="true"
+                 android:name="com.company.runman.comman.application.SobeyApplication">
+        <activity android:name="com.company.runman.activity.LoginActivity"
+                  android:launchMode="singleTop"
+                  android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="com.company.runman.activity.TrainingPlanEditActivity"
+                  android:launchMode="singleTask"
+                 />
+        <activity android:name="com.company.runman.activity.CoachListActivity"
+                  android:launchMode="singleTask"
+                />
+        <activity android:name="com.company.runman.activity.TrainingPlanDetailActivity"
+                  android:launchMode="singleTask"
+                />
+        <activity android:name="com.company.runman.activity.MyInfoActivity"
+                  android:launchMode="singleTask"/>
+        <activity android:name="com.company.runman.activity.MyinfoModifyActivity"
+                  android:launchMode="singleTask"/>
+        <activity android:name="com.company.runman.activity.CoachModifyActivity"
+                  android:launchMode="singleTask"/>
+        <!--<activity android:name="com.company.runman.activity.CodeScanResultActivity"-->
+                  <!--android:screenOrientation="portrait"/>-->
+        <!--<activity android:name="com.company.runman.activity.CodeScanActivity"-->
+                  <!--android:screenOrientation="portrait"/>-->
+        <!--<activity android:name="com.company.runman.activity.CodeScanHistoryActivity"-->
+                  <!--android:screenOrientation="portrait"/>-->
+        <!--<activity android:name="com.company.runman.activity.WebViewActivity"-->
+                  <!--android:screenOrientation="portrait"/>-->
+        <!--<activity android:name="com.company.runman.activity.FrontSDKActivity"-->
+                  <!--android:screenOrientation="portrait"/>-->
+        <!--<activity android:name="com.company.runman.activity.SettingInnerActivity"-->
+                  <!--android:screenOrientation="portrait"/>-->
+        <!--<activity android:name="com.company.runman.activity.SettingBindActivity"-->
+                  <!--android:screenOrientation="portrait"/>-->
+        <!--<activity android:name="com.company.runman.activity.CollectionActivity"-->
+                  <!--android:screenOrientation="portrait"/>-->
+        <!--<activity android:name="com.company.runman.activity.MessageActivity"-->
+                  <!--android:screenOrientation="portrait"/>-->
+        <!--<activity android:name="com.company.runman.activity.MessageDetailActivity"-->
+                  <!--android:screenOrientation="portrait"/>-->
+        <!--<activity android:name="com.company.runman.activity.MonitorStationListActivity"-->
+                  <!--android:screenOrientation="portrait"/>-->
+        <!--<activity android:name="com.company.runman.activity.MonitorHostListActivity"-->
+                  <!--android:screenOrientation="portrait"/>-->
+        <!--<activity android:name="com.company.runman.activity.MonitorHostDetailActivity"-->
+                  <!--android:screenOrientation="portrait"/>-->
+        <!--<activity android:name="com.company.runman.activity.MonitorStationDetailActivity"-->
+                  <!--android:screenOrientation="portrait"/>-->
+        <!--<activity android:name="com.company.runman.activity.MonitorEventListActivity"-->
+                  <!--android:screenOrientation="portrait"/>-->
+        <!--<activity android:name="com.company.runman.activity.MonitorEventTypeListActivity"-->
+                  <!--android:screenOrientation="portrait"/>-->
+        <!--<activity android:name="com.company.runman.activity.MonitorStationEditActivity"-->
+                  <!--android:screenOrientation="portrait"/>-->
+        <activity android:name="com.company.runman.activity.RegisterActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name="com.company.runman.activity.CheckVersionActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/check_version_style"/>
+        <!--<activity android:name="com.company.runman.activity.SearchActivity"-->
+                  <!--android:theme="@style/check_version_style"-->
+                  <!--android:screenOrientation="portrait"/>-->
+        <!--<activity android:name="com.company.runman.activity.FeedBackActivity"-->
+                  <!--android:theme="@style/check_version_style"-->
+                  <!--android:screenOrientation="portrait"/>-->
+        <!--<activity android:name="com.baidu.frontia.activity.share.FrontiaLocalShareActivity"-->
+                  <!--android:screenOrientation="portrait"/>-->
+        <!--<activity android:name="com.baidu.frontia.activity.share.FrontiaSocialOAuthActivity"-->
+                  <!--android:screenOrientation="portrait"/>-->
+
+        <!--<activity android:name=".activity.SendReceiverActivity"-->
+                  <!--android:screenOrientation="portrait"-->
+                  <!--android:clearTaskOnLaunch="true">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.SEND"/>-->
+                <!--<action android:name="android.intent.action.MAIN"/>-->
+                <!--<category android:name="android.intent.category.DEFAULT"/>-->
+                <!--<data android:mimeType="text/*"/>-->
+                <!--<data android:mimeType="image/*"/>-->
+            <!--</intent-filter>-->
+        <!--</activity>-->
+
+        <!-- 百度统计 -->
+        <meta-data android:name="BaiduMobAd_STAT_ID" android:value="cd4099c23c" />
+        <!-- 渠道商编号 -->
+        <meta-data android:name="BaiduMobAd_CHANNEL" android:value="runman" />
+        <!-- 是否开启错误日志统计，默认为false -->
+        <meta-data android:name="BaiduMobAd_EXCEPTION_LOG" android:value="true" />
+        <!-- 日志发送策略，可选值：APP_START、ONCE_A_DAY、SET_TIME_INTERVAL，默认为APP_START -->
+        <meta-data android:name="BaiduMobAd_SEND_STRATEGY" android:value="APP_START" />
+        <!-- 日志仅在wifi网络下发送，默认为false -->
+        <meta-data android:name="BaiduMobAd_ONLY_WIFI" android:value="true" />
+        <!-- 是否获取基站位置信息 ,默认为true-->
+        <meta-data android:name="BaiduMobAd_CELL_LOCATION" android:value="true" />
+        <!-- 是否获取GPS位置信息，默认为true -->
+        <meta-data android:name="BaiduMobAd_GPS_LOCATION" android:value="true" />
+        <!-- 是否获取WIFI位置信息，默认为true -->
+        <meta-data android:name="BaiduMobAd_WIFI_LOCATION" android:value="true" />
+    </application>
+</manifest>

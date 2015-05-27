@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- login activity -->
+    <dimen name="login_username_margin_top">230dip</dimen>
+    <dimen name="login_username_margin_left">30dip</dimen>
+    <dimen name="login_username_margin_right">30dip</dimen>
+    <dimen name="login_username_input_padding_left">50dip</dimen>
+    <dimen name="login_username_label_margin_left">30dip</dimen>
+    <dimen name="login_password_margin_top">8dip</dimen>
+    <dimen name="login_password_input_padding_left">50dip</dimen>
+    <dimen name="login_password_label_margin_left">30dip</dimen>
+    <dimen name="login_btn_height">40dip</dimen>
+    <dimen name="login_btn_text_size">16sp</dimen>
+    <dimen name="login_btn_margin_top">24dip</dimen>
+    <dimen name="login_register_btn_margin_top">8dip</dimen>
+    <dimen name="login_label_text_size">16sp</dimen>
+    <dimen name="login_input_text_size">14sp</dimen>
+    <dimen name="login_tips_btn_margin_top">20dip</dimen>
+    <dimen name="login_tips_text_size">14sp</dimen>
+    <dimen name="login_tips_middle_margin">30dip</dimen>
+    <dimen name="login_bottom_window_height">80dip</dimen>
+    <!-- main activity -->
+    <dimen name="main_item_middle_space_height">5dip</dimen>
+    <dimen name="main_bottom_text_size">14sp</dimen>
+    <dimen name="main_middle_text_size">16sp</dimen>
+    <dimen name="main_bottom_padding">4dip</dimen>
+    <!-- header view -->
+    <dimen name="header_view_container_padding">10dip</dimen>
+    <dimen name="header_view_height">50dip</dimen>
+    <dimen name="header_view_title_text_size">16sp</dimen>
+    <!-- setting window -->
+    <dimen name="setting_window_width">260dip</dimen>
+    <dimen name="setting_window_text_size">16sp</dimen>
+    <dimen name="setting_window_item_padding">28dip</dimen>
+    <dimen name="setting_window_account_item_padding">20dip</dimen>
+    <dimen name="setting_window_item_height">80dip</dimen>
+    <dimen name="setting_window_item_top_height">250dip</dimen>
+    <dimen name="setting_window_item_account_line_height">1dip</dimen>
+    <dimen name="setting_window_item_line_height">1px</dimen>
+    <dimen name="setting_window_inner_setting_item_padding">20dip</dimen>
+    <dimen name="setting_window_inner_setting_item_height">50dip</dimen>
+    <dimen name="setting_color_size">16sp</dimen>
+    <!-- common -->
+    <dimen name="loading_text_size">16sp</dimen>
+    <dimen name="popup_window_size">180dip</dimen>
+    <dimen name="popup_window_item_height">35dip</dimen>
+    <dimen name="grid_view_height">30dp</dimen>
+    <dimen name="grid_view_spacing">10dp</dimen>
+    <dimen name="font_size_14">14sp</dimen>
+    <dimen name="font_size_15">15sp</dimen>
+    <dimen name="font_size_16">16sp</dimen>
+    <dimen name="font_size_17">16sp</dimen>
+    <dimen name="font_size_18">17sp</dimen>
+    <dimen name="font_size_19">19sp</dimen>
+</resources>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <com.company.runman.view.HeaderView
+            style="@style/HeaderViewStyle"/>
+
+    <LinearLayout style="@style/CommonBackgroundStyle">
+        <EditText android:layout_width="match_parent"
+                  android:layout_height="300dp"
+                  android:background="@color/white"
+                  android:padding="3dp"
+                  android:gravity="left|top"
+                  android:id="@+id/feedback_content"
+                  android:hint="@string/feedback_content"/>
+        <EditText android:layout_width="match_parent"
+                  android:layout_height="40dp"
+                  android:background="@color/white"
+                  android:padding="3dp"
+                  android:layout_marginTop="10dp"
+                  android:gravity="center_vertical"
+                  android:singleLine="true"
+                  android:id="@+id/feedback_phone"
+                  android:hint="@string/feedback_phone"/>
+        <Button style="@style/CommonButtonStyle"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:background="@drawable/register_btn_bg"
+                android:textColor="@color/white"
+                android:id="@+id/feedback_commit"
+                android:text="@string/feedback_commit"/>
+    </LinearLayout>
+</LinearLayout>

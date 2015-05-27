@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:orientation="vertical">
+    <com.company.runman.view.HeaderView style="@style/HeaderViewStyle"
+                                           android:focusableInTouchMode="true"/>
+
+    <com.company.runman.view.sortlistview.ClearEditText
+            android:id="@+id/filter_edit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:layout_margin="5dip"
+            android:background="@drawable/search_bar_edit_normal"
+            android:drawableLeft="@drawable/search_bar_icon_normal"
+            android:hint="@string/str_c_search"
+            android:singleLine="true"
+            android:textSize="@dimen/font_size_15"/>
+
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center_horizontal"
+              android:paddingTop="5dip"
+              android:paddingBottom="5dip"
+              android:paddingLeft="50dip"
+              android:paddingRight="50dip"
+              android:textSize="@dimen/font_size_16"
+              android:gravity="center_vertical"
+              android:background="@drawable/abs__list_holo_light_selector"
+              android:id="@+id/extraTextView"
+              android:visibility="gone"/>
+
+    <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+        <com.company.runman.view.CommonListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/commonListView"/>
+
+        <TextView
+                android:id="@+id/dialog"
+                android:layout_width="80.0dip"
+                android:layout_height="80.0dip"
+                android:layout_gravity="center"
+                android:background="@drawable/show_head_toast_bg"
+                android:gravity="center"
+                android:textColor="#ffffffff"
+                android:textSize="30.0dip"
+                android:visibility="invisible"/>
+
+        <com.company.runman.view.sortlistview.SideBar
+                android:id="@+id/sidrbar"
+                android:layout_width="30.0dip"
+                android:layout_height="fill_parent"
+                android:layout_gravity="right|center"/>
+    </FrameLayout>
+
+</LinearLayout>

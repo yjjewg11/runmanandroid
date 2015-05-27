@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <com.company.runman.view.HeaderView android:layout_width="wrap_content"
+                                           android:layout_height="wrap_content"/>
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/monitor_bg_color">
+        <LinearLayout style="@style/CommonBackgroundStyle">
+            <RadioGroup
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" android:orientation="horizontal"
+                    android:layout_gravity="center_horizontal">
+                <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="普通跑步"
+                        android:id="@+id/exercise_mode1" android:checked="true"/>
+                <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="马拉松"
+                        android:id="@+id/exercise_mode2"/>
+            </RadioGroup>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+            <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="开始日期"
+                    />
+            <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="time"
+                    android:ems="10"
+                    android:id="@+id/start_date" android:editable="true" android:enabled="true" android:focusable="true"
+                    android:hint="开始日期" android:text="2015-06-06"/>
+</LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent" android:layout_gravity="center_horizontal">
+                <EditText
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="time"
+                    android:ems="10"
+                    android:id="@+id/start_time" android:editable="true" android:enabled="true" android:focusable="true"
+                    android:hint="开始时间" android:text="14:00:00"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="~"
+                        android:id="@+id/textView2"/>
+                <EditText
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="time"
+                        android:ems="10"
+                        android:id="@+id/end_time" android:editable="true" android:enabled="true" android:focusable="true"
+                        android:hint="结束时间" android:text="15:00:00"/>
+            </LinearLayout>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+            <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="地点"
+                    />
+            <EditText style="@style/RegisterEditTextViewStyle"
+                      android:id="@+id/place"
+                      android:hint="地点"/>
+</LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+                <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="距离"
+                        />
+                <EditText style="@style/RegisterEditTextViewStyle"
+                          android:id="@+id/runKM"
+                          android:hint="距离" android:inputType="number"/>
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+                <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="时间要求"
+                        />
+                <EditText style="@style/RegisterEditTextViewStyle"
+                          android:id="@+id/run_times"
+                          android:hint="时间要求（分钟）" android:layout_width="364dp"/>
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+                <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="其他要求"
+                        />
+                <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="textMultiLine"
+                        android:ems="10"
+                        android:id="@+id/context" android:hint="其他要求"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+                <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="出价"
+                        android:id="@+id/textView"/>
+                <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="number|numberDecimal"
+                        android:ems="10"
+                        android:id="@+id/price" android:editable="true" android:enabled="true" android:text="50"
+                        android:hint="出价"/>
+            </LinearLayout>
+            <TextView
+                    android:text="立即预约"
+                    android:id="@+id/save_btn" android:clickable="true" android:layout_width="fill_parent"
+                      style="@style/CommonButtonStyle"/>
+        </LinearLayout>
+    </ScrollView>
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView" android:layout_gravity="center_horizontal"/>
+</LinearLayout>

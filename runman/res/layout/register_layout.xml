@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <com.company.runman.view.HeaderView android:layout_width="wrap_content"
+                                           android:layout_height="wrap_content"/>
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/monitor_bg_color">
+        <LinearLayout style="@style/CommonBackgroundStyle">
+            <EditText style="@style/RegisterEditTextViewStyle"
+                      android:id="@+id/loginname"
+                      android:hint="@string/register_hint_username"/>
+            <EditText style="@style/RegisterEditTextViewStyle"
+                      android:id="@+id/name"
+                      android:hint="@string/register_hint_nickname"/>
+
+            <EditText style="@style/RegisterEditTextViewStyle"
+                      android:id="@+id/password"
+                      android:inputType="textPassword"
+                      android:hint="@string/register_hint_password"/>
+
+            <EditText style="@style/RegisterEditTextViewStyle"
+                      android:id="@+id/confirmPassword"
+                      android:inputType="textPassword"
+                      android:hint="@string/register_hint_confirm"/>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+            <EditText style="@style/RegisterEditTextViewStyle"
+                      android:id="@+id/tel_smscode"
+                      android:hint="@string/register_hint_smscode" android:layout_width="150dp"/>
+
+            <TextView style="@style/CommonButtonStyle" android:text="@string/register_sendCode_btn"
+                      android:id="@+id/sendCode_btn" android:layout_width="150dp"
+                      android:layout_height="wrap_content" android:autoText="false"/>
+            </LinearLayout>
+
+            <TextView style="@style/CommonButtonStyle"
+                      android:text="@string/register_register_btn_confirm"
+                      android:background="@drawable/register_activity_btn_selector"
+                      android:textColor="@color/white"
+                      android:id="@+id/register_btn"/>
+        </LinearLayout>
+    </ScrollView>
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"/>
+</LinearLayout>

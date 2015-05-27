@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white">
+    <com.company.runman.view.HeaderView style="@style/HeaderViewStyle"/>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="@dimen/setting_window_inner_setting_item_height"
+                  android:paddingLeft="@dimen/setting_window_inner_setting_item_padding"
+                  android:orientation="horizontal">
+        <ImageView android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="center_vertical"
+                   android:src="@drawable/sina_icon"
+                   android:layout_marginRight="@dimen/setting_window_account_item_padding"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="match_parent"
+                  android:gravity="center_vertical"
+                  android:layout_weight="1"
+                  android:text="@string/setting_binding_sina"
+                  android:textSize="@dimen/setting_color_size"
+                  android:textColor="@color/black"
+                />
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="match_parent"
+                  android:id="@+id/sinaBindBtn"
+                  android:paddingRight="@dimen/setting_window_inner_setting_item_padding"
+                  android:drawableLeft="@drawable/account_bind_icon"
+                  android:gravity="center_vertical"
+                  android:drawablePadding="10dp"
+                  android:background="@drawable/common_item_selector"
+                  android:text="@string/setting_binding"/>
+    </LinearLayout>
+
+    <View android:layout_width="match_parent"
+          android:layout_height="1px"
+          android:background="@color/setting_window_inner_setting_color_bg"/>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="@dimen/setting_window_inner_setting_item_height"
+                  android:paddingLeft="@dimen/setting_window_inner_setting_item_padding"
+                  android:orientation="horizontal">
+        <ImageView android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="center_vertical"
+                   android:src="@drawable/tencent_icon"
+                   android:layout_marginRight="@dimen/setting_window_account_item_padding"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="match_parent"
+                  android:gravity="center_vertical"
+                  android:layout_weight="1"
+                  android:text="@string/setting_binding_tencent"
+                  android:textSize="@dimen/setting_color_size"
+                  android:textColor="@color/black"
+                />
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="match_parent"
+                  android:id="@+id/tencentBindBtn"
+                  android:paddingRight="@dimen/setting_window_inner_setting_item_padding"
+                  android:drawableLeft="@drawable/account_bind_icon"
+                  android:gravity="center_vertical"
+                  android:drawablePadding="10dp"
+                  android:background="@drawable/common_item_selector"
+                  android:text="@string/setting_binding"/>
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:visibility="gone">
+        <View android:layout_width="match_parent"
+              android:layout_height="1px"
+              android:background="@color/setting_window_inner_setting_color_bg"/>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="@dimen/setting_window_inner_setting_item_height"
+                      android:paddingLeft="@dimen/setting_window_inner_setting_item_padding"
+                      android:orientation="horizontal">
+            <ImageView android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_gravity="center_vertical"
+                       android:src="@drawable/tencent_icon"
+                       android:layout_marginRight="@dimen/setting_window_account_item_padding"/>
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="match_parent"
+                      android:gravity="center_vertical"
+                      android:layout_weight="1"
+                      android:text="@string/setting_binding_renren"
+                      android:textSize="@dimen/setting_color_size"
+                      android:textColor="@color/black"
+                    />
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="match_parent"
+                      android:id="@+id/renrenBindBtn"
+                      android:paddingRight="@dimen/setting_window_inner_setting_item_padding"
+                      android:drawableLeft="@drawable/account_bind_icon"
+                      android:gravity="center_vertical"
+                      android:drawablePadding="10dp"
+                      android:background="@drawable/common_item_selector"
+                      android:text="@string/setting_binding"/>
+        </LinearLayout>
+
+        <View android:layout_width="match_parent"
+              android:layout_height="1px"
+              android:background="@color/setting_window_inner_setting_color_bg"/>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="@dimen/setting_window_inner_setting_item_height"
+                      android:paddingLeft="@dimen/setting_window_inner_setting_item_padding"
+                      android:orientation="horizontal">
+            <ImageView android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_gravity="center_vertical"
+                       android:src="@drawable/tencent_icon"
+                       android:layout_marginRight="@dimen/setting_window_account_item_padding"/>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="match_parent"
+                      android:gravity="center_vertical"
+                      android:layout_weight="1"
+                      android:text="@string/setting_binding_qq"
+                      android:textSize="@dimen/setting_color_size"
+                      android:textColor="@color/black"
+                    />
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="match_parent"
+                      android:id="@+id/qqBindBtn"
+                      android:paddingRight="@dimen/setting_window_inner_setting_item_padding"
+                      android:drawableLeft="@drawable/account_bind_icon"
+                      android:gravity="center_vertical"
+                      android:drawablePadding="10dp"
+                      android:background="@drawable/common_item_selector"
+                      android:text="@string/setting_binding"/>
+        </LinearLayout>
+
+        <View android:layout_width="match_parent"
+              android:layout_height="1px"
+              android:background="@color/setting_window_inner_setting_color_bg"/>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="@dimen/setting_window_inner_setting_item_height"
+                      android:paddingLeft="@dimen/setting_window_inner_setting_item_padding"
+                      android:orientation="horizontal">
+            <ImageView android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_gravity="center_vertical"
+                       android:src="@drawable/tencent_icon"
+                       android:layout_marginRight="@dimen/setting_window_account_item_padding"/>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="match_parent"
+                      android:gravity="center_vertical"
+                      android:layout_weight="1"
+                      android:text="@string/setting_binding_qzone"
+                      android:textSize="@dimen/setting_color_size"
+                      android:textColor="@color/black"
+                    />
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="match_parent"
+                      android:id="@+id/qzoneBindBtn"
+                      android:paddingRight="@dimen/setting_window_inner_setting_item_padding"
+                      android:drawableLeft="@drawable/account_bind_icon"
+                      android:gravity="center_vertical"
+                      android:drawablePadding="10dp"
+                      android:background="@drawable/common_item_selector"
+                      android:text="@string/setting_binding"/>
+        </LinearLayout>
+
+        <View android:layout_width="match_parent"
+              android:layout_height="1px"
+              android:background="@color/setting_window_inner_setting_color_bg"/>
+    </LinearLayout>
+</LinearLayout>

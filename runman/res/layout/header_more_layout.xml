@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content">
+    <TextView style="@style/popupWindowStyle"
+              android:id="@+id/popup_window_collection"
+              android:text="@string/popup_window_collection"
+              android:drawableLeft="@drawable/popup_window_collection"/>
+    <TextView style="@style/popupWindowStyle"
+              android:id="@+id/popup_window_cancel_collection"
+              android:text="@string/popup_window_cancel_collection"
+              android:drawableLeft="@drawable/popup_window_collection"
+              android:visibility="gone"/>
+    <TextView style="@style/popupWindowStyle"
+              android:id="@+id/popup_window_topic"
+              android:text="@string/popup_window_topic"
+              android:drawableLeft="@drawable/popup_window_topic"/>
+    <TextView style="@style/popupWindowStyle"
+              android:id="@+id/popup_window_share"
+              android:text="@string/popup_window_share"
+              android:drawableLeft="@drawable/popup_window_share"/>
+    <TextView style="@style/popupWindowStyle"
+              android:id="@+id/popup_window_refresh"
+              android:text="@string/popup_window_refresh"
+              android:drawableLeft="@drawable/popup_window_refresh"/>
+</LinearLayout>

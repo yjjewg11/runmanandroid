@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:orientation="vertical"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:paddingBottom="15dip"
+             android:layout_gravity="center">
+    <ImageView android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:id="@+id/icon"
+               android:src="@drawable/main_menu_monitor_icon"
+               android:layout_centerInParent="true"
+               android:layout_gravity="center"
+               android:scaleType="fitXY"/>
+
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:id="@+id/text"
+              android:textColor="@color/white"
+              android:layout_gravity="center"
+              android:gravity="center"
+              android:layout_marginTop="@dimen/main_item_middle_space_height"
+              android:layout_alignParentBottom="true"
+              android:textSize="@dimen/main_middle_text_size"
+              android:text="扫一扫"/>
+
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:id="@+id/count"
+              android:layout_marginLeft="30dip"
+              android:layout_marginTop="-20dip"
+              android:background="@drawable/main_red_number_bg"
+              android:textColor="@color/wheat"
+              android:gravity="center"
+              android:layout_gravity="center"
+              android:visibility="gone"
+              android:text="99"/>
+</FrameLayout>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <com.company.runman.view.HeaderView style="@style/HeaderViewStyle"/>
+    <LinearLayout style="@style/CommonBackgroundStyle">
+        <!-- 绑定其他平台 -->
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="@dimen/setting_window_inner_setting_item_height"
+                      android:paddingLeft="@dimen/setting_window_inner_setting_item_padding"
+                      android:paddingRight="@dimen/setting_window_inner_setting_item_padding"
+                      android:background="@drawable/common_item_selector"
+                      android:id="@+id/setting_inner_bind">
+            <TextView style="@style/CommonInputTextViewStyle"
+                      android:text="绑定平台"/>
+            <ImageView android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_gravity="center_vertical"
+                       android:src="@drawable/img_kh"/>
+        </LinearLayout>
+        <View android:layout_width="match_parent"
+              android:layout_height="1px"
+              android:background="@color/gray_b6"/>
+        <!-- 新消息通知 -->
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="@dimen/setting_window_inner_setting_item_height"
+                      android:background="@drawable/common_item_selector"
+                      android:orientation="horizontal"
+                      android:paddingLeft="@dimen/setting_window_inner_setting_item_padding"
+                      android:paddingRight="@dimen/setting_window_inner_setting_item_padding">
+            <TextView style="@style/CommonInputTextViewStyle"
+                      android:text="推送设置"/>
+            <ToggleButton android:id="@+id/push_toggle"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:background="@drawable/common_toggle_btn_selector"
+                          android:textOff=""
+                          android:textOn=""/>
+        </LinearLayout>
+        <View android:layout_width="match_parent"
+              android:layout_height="1px"
+              android:background="@color/gray_b6"/>
+        <!-- 关于 -->
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="@dimen/setting_window_inner_setting_item_height"
+                      android:background="@drawable/common_item_selector"
+                      android:visibility="gone"
+                      android:paddingLeft="@dimen/setting_window_inner_setting_item_padding"
+                      android:paddingRight="@dimen/setting_window_inner_setting_item_padding">
+            <TextView style="@style/CommonInputTextViewStyle"
+                      android:text="关于索贝云维护"/>
+            <ImageView android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_gravity="center_vertical"
+                       android:src="@drawable/img_kh"/>
+        </LinearLayout>
+        <View android:layout_width="match_parent"
+              android:layout_height="1px"
+              android:background="@color/gray_b6"/>
+        <!-- 版本信息 -->
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="@dimen/setting_window_inner_setting_item_height"
+                      android:id="@+id/setting_inner_check_version"
+                      android:background="@drawable/common_item_selector"
+                      android:paddingLeft="@dimen/setting_window_inner_setting_item_padding"
+                      android:paddingRight="@dimen/setting_window_inner_setting_item_padding">
+            <TextView style="@style/CommonInputTextViewStyle"
+                      android:text="版本信息"/>
+            <ImageView android:layout_width="wrap_content"
+                       android:layout_height="match_parent"
+                       android:id="@+id/check_version_img"
+                       android:visibility="gone"
+                       android:layout_gravity="center_vertical"
+                       android:src="@drawable/loading_progress_small"/>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="match_parent"
+                      android:id="@+id/currentVersion"
+                      android:gravity="center_vertical"
+                      android:textSize="14sp"
+                      android:textColor="@color/black"
+                    />
+        </LinearLayout>
+        <View android:layout_width="match_parent"
+              android:layout_height="1px"
+              android:background="@color/gray_b6"/>
+        <!-- 注销 -->
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="@dimen/setting_window_inner_setting_item_height"
+                      android:background="@drawable/common_item_selector"
+                      android:id="@+id/setting_inner_logout"
+                      android:layout_marginTop="8dp"
+                      android:paddingLeft="@dimen/setting_window_inner_setting_item_padding"
+                      android:paddingRight="@dimen/setting_window_inner_setting_item_padding">
+            <TextView style="@style/CommonInputTextViewStyle"
+                      android:text="注销"/>
+            <ImageView android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_gravity="center_vertical"
+                       android:src="@drawable/img_kh"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
