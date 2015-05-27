@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/monitor_bg_color">
+        <LinearLayout style="@style/CommonBackgroundStyle">
+            <RadioGroup
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" android:orientation="horizontal"
+                    android:layout_gravity="center_horizontal">
+                <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="普通跑步"
+                        android:id="@+id/exercise_mode1" android:checked="true"/>
+                <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="马拉松"
+                        android:id="@+id/exercise_mode2"/>
+            </RadioGroup>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+            <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="标题"
+                    />
+            <EditText style="@style/RegisterEditTextViewStyle"
+                      android:id="@+id/title"
+                      android:hint="标题"/>
+</LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+                <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="时长"
+                        />
+                <EditText style="@style/RegisterEditTextViewStyle"
+                          android:id="@+id/time_length"
+                          android:hint="时长" android:inputType="number"/>
+
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+                <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="课程难度"
+                        />
+                <EditText style="@style/RegisterEditTextViewStyle"
+                          android:id="@+id/difficulty_degree"
+                          android:hint="1-5数字" android:layout_width="364dp" android:inputType="number"/>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+                <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="地点"
+                        />
+                <EditText style="@style/RegisterEditTextViewStyle"
+                          android:id="@+id/place"
+                          android:hint="地点" android:layout_width="364dp"/>
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+                <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="内容"
+                        />
+
+                <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="textMultiLine"
+                        android:ems="10"
+                        android:id="@+id/context" android:hint="内容"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+                <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="价格"
+                        android:id="@+id/textView"/>
+                <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="number|numberDecimal"
+                        android:ems="10"
+                        android:id="@+id/price" android:editable="true" android:enabled="true" android:text="50"
+                        android:hint="价格"/>
+            </LinearLayout>
+            <TextView
+                    android:text="保存"
+                    android:id="@+id/save_btn" android:clickable="true" android:layout_width="fill_parent"
+                      style="@style/CommonButtonStyle"/>
+        </LinearLayout>
+    </ScrollView>
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView" android:layout_gravity="center_horizontal"/>
+</LinearLayout>

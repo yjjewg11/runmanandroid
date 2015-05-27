@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -31,19 +30,22 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
+ * 教练首页
  * Created by Administrator on 2015/5/20.
  */
-public class MyInfoActivity extends BaseActivity {
+public class CoachInfoActivity extends BaseActivity {
     static public String TAG="MyInfoActivity";
     private ImageView imageView_myhead;
     private TextView name;
     private TextView myinfo_detail;
     private TextView modify_myinfo;
 
-    private TextView add_training_plan;
+
     private LinkedList<String> mListItems;
   //  private ListView listView;
     private TrainingPlanAdapter baseListAdapter;
@@ -51,6 +53,9 @@ public class MyInfoActivity extends BaseActivity {
     public static PullToRefreshListView listView;
 
     private Button button_more;
+    private Button button_training_course;
+    private Button button_partner_training;
+
 
 
     View view;
@@ -59,27 +64,27 @@ public class MyInfoActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        new trainingPlanListMyAsyncTask(this).execute();
+      //  new PartnerTrainingMyAsyncTask(this).execute();
     }
 
     @Override
     public void setContentView() {
-        setContentView(R.layout.myinfo_layout);
+        setContentView(R.layout.coach_info_layout);
     }
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        listView = (PullToRefreshListView) findViewById(R.id.listViewMytrainingPlan);
+        listView = (PullToRefreshListView) findViewById(R.id.listViewMyTrainingCourse);
         // Set a listener to be invoked when the list should be refreshed.
         listView.setOnRefreshListener(new PullToRefreshListView.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 // Do work to refresh the list here.
-                new trainingPlanListMyAsyncTask(MyInfoActivity.this, Constant.Query.Operate_Refresh).execute();
+                new PartnerTrainingMyAsyncTask(CoachInfoActivity.this, Constant.Query.Operate_Refresh).execute();
             }
             @Override
             public void onLoadMore() {
-                new trainingPlanListMyAsyncTask(MyInfoActivity.this, Constant.Query.Operate_LoadMore).execute();
+                new PartnerTrainingMyAsyncTask(CoachInfoActivity.this, Constant.Query.Operate_LoadMore).execute();
             }
         });
 
@@ -127,7 +132,7 @@ public class MyInfoActivity extends BaseActivity {
         listView.setAdapter(baseListAdapter);
         loadUserifoToshow();
 
-        new trainingPlanListMyAsyncTask(MyInfoActivity.this, 0).execute();
+       // new PartnerTrainingMyAsyncTask(CoachInfoActivity.this, 0).execute();
     }
 
     /**
@@ -180,8 +185,13 @@ public class MyInfoActivity extends BaseActivity {
         modify_myinfo = (TextView) findViewById(R.id.modify_myinfo);
         modify_myinfo.setOnClickListener(this);
 
-        add_training_plan=(TextView) findViewById(R.id.add_training_plan);
-        add_training_plan.setOnClickListener(this);
+        button_partner_training=(Button) findViewById(R.id.button_partner_training);
+        button_partner_training.setOnClickListener(this);
+
+        button_training_course=(Button) findViewById(R.id.button_training_course);
+        button_training_course.setOnClickListener(this);
+
+        button_partner_training.setOnClickListener(this);
 
         button_more=(Button) findViewById(R.id.button_more);
         button_more.setOnClickListener(this);
@@ -196,6 +206,13 @@ public class MyInfoActivity extends BaseActivity {
                 break;
             case R.id.add_training_plan:
                 IntentUtils.startTrainingPlanEditActivity(mContext, null);
+                break;
+            case R.id.button_partner_training:
+               //
+                break;
+            case R.id.button_training_course:
+
+             startActivity( new Intent(mContext, MyTrainingCourseActivity.class));
                 break;
             case R.id.button_more:
                 showPopupWindow(view);
@@ -215,35 +232,12 @@ public class MyInfoActivity extends BaseActivity {
         pop.setOutsideTouchable(true);
         pop.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
 
-
-
-        ((Button) view.findViewById(R.id.button_Coach_apply)).setOnClickListener(new View.OnClickListener() {
+        Button button_Coach_mode=((Button) view.findViewById(R.id.button_Coach_mode));
+        button_Coach_mode.setText("切换到普通用户");
+        button_Coach_mode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, CoachModifyActivity.class);
-                startActivity(intent);
-                pop.dismiss();
-                // TODO Auto-generated method stub
-
-            }
-        });
-        ((Button) view.findViewById(R.id.button_Coach_mode)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String userinfoStr = SharePreferenceProvider.getInstance(mContext).getUserinfo();
-                UserInfoReturn user=(UserInfoReturn)new GsonUtils().stringToObject(userinfoStr, UserInfoReturn.class);
-
-                if(Integer.valueOf(0).equals(user.getMarathon_verify())){
-                    Toast.makeText(mContext, "请提交教练申请", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if(Integer.valueOf(2).equals(user.getMarathon_verify())){
-                    Toast.makeText(mContext, "审核中", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                Intent intent = new Intent(mContext, CoachInfoActivity.class);
-                startActivity(intent);
+                startActivity( new Intent(mContext, MyInfoActivity.class));
                 pop.dismiss();
                 // TODO Auto-generated method stub
 
@@ -306,17 +300,17 @@ public class MyInfoActivity extends BaseActivity {
     /**
      * 查询训练计划
      */
-    private class trainingPlanListMyAsyncTask extends AbstractAsyncTask<String, Void, Object> {
+    private class PartnerTrainingMyAsyncTask extends AbstractAsyncTask<String, Void, Object> {
 
         private Context context;
         private int operate;
         private NSearchContion nSearchContion;
 
-        public trainingPlanListMyAsyncTask(Context context, int operate) {
+        public PartnerTrainingMyAsyncTask(Context context, int operate) {
             this.context = context;
             this.operate = operate;
         }
-        public trainingPlanListMyAsyncTask(Context context) {
+        public PartnerTrainingMyAsyncTask(Context context) {
             this.context = context;
             this.operate = 0;
         }

@@ -208,8 +208,7 @@ public class CoachModifyActivity extends BaseActivity {
                 form.setSex(0);
             }
             try {
-                form.setName(vo.getName());
-                form.setCity(vo.getCity());
+                form.setName(name.getText().toString());
                 if (sex_1.isChecked()) {
                     form.setSex(1);
                 } else {

@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
+import com.company.runman.activity.TrainingCourseEditActivity;
 import com.company.runman.activity.TrainingPlanDetailActivity;
 import com.company.runman.activity.TrainingPlanEditActivity;
 import com.company.runman.datacenter.provider.SharePreferenceProvider;
@@ -34,6 +35,22 @@ public class IntentUtils {
         }
         mContext.startActivity(intent);
     }
+    /**
+     * 跳转编辑训练课程模块
+     * @param mContext
+     * @param data
+     */
+    public static void startTrainingCourseEditActivityActivity(Context mContext,Serializable data) {
+        Intent intent = new Intent(mContext, TrainingCourseEditActivity.class);
+        if(data!=null){
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(Constant.ResponseData.DATA,  data);
+            intent.putExtras(bundle);
+        }
+        mContext.startActivity(intent);
+    }
+
+
     /**
      * 跳转编辑训练计划模块
      * @param mContext
