@@ -5,31 +5,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
 
-    <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-        <Button
-               android:layout_width="wrap_content"
-                android:layout_weight="1.0"
-                android:layout_height="wrap_content"
-                android:text="<<"
-                android:id="@+id/button_week_back"/>
-
-        <TextView
-                android:layout_width="120dp"
-                android:layout_weight="1.0"
-                android:layout_height="wrap_content"
-                android:text="2015-05-25~2015-05-31"
-                android:id="@+id/textView_days"/>
-        <Button
-               android:layout_width="wrap_content"
-                android:layout_weight="1.0"
-                android:layout_height="wrap_content"
-                android:text=">>"
-                android:id="@+id/button_week_next"/>
-    </LinearLayout>
-    <LinearLayout
+     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -39,48 +15,48 @@
                 android:layout_height="wrap_content"
                 android:text="12:00-14:00"
                 android:id="@+id/textView_start_end_time"/>
-        <CheckBox
+        <Button
                 android:layout_width="wrap_content"
                 android:layout_weight="1.0" android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:text="周一"
-                android:id="@+id/checkBox_week1" android:enabled="false"/>
-        <CheckBox
+                android:id="@+id/Button_week1" android:enabled="false"/>
+        <Button
                android:layout_width="wrap_content"
                 android:layout_weight="1.0" android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:text="周二"
-                android:id="@+id/checkBox_week2"/>
-        <CheckBox
+                android:id="@+id/Button_week2"/>
+        <Button
                android:layout_width="wrap_content"
                 android:layout_weight="1.0" android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:text="周三"
-                android:id="@+id/checkBox_week3"/>
-        <CheckBox
+                android:id="@+id/Button_week3"/>
+        <Button
                android:layout_width="wrap_content"
                 android:layout_weight="1.0" android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:text="周四"
-                android:id="@+id/checkBox_week4"/>
-        <CheckBox
+                android:id="@+id/Button_week4"/>
+        <Button
                android:layout_width="wrap_content"
                 android:layout_weight="1.0" android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:text="周五"
-                android:id="@+id/checkBox_week5" />
-        <CheckBox
+                android:id="@+id/Button_week5" />
+        <Button
                android:layout_width="wrap_content"
                 android:layout_weight="1.0" android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:text="周六"
-                android:id="@+id/checkBox_week6"/>
-        <CheckBox
+                android:id="@+id/Button_week6"/>
+        <Button
                android:layout_width="wrap_content"
                 android:layout_weight="1.0" android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:text="周七"
-                android:id="@+id/checkBox_week7"/>
+                android:id="@+id/Button_week7"/>
 
     </LinearLayout>
 </LinearLayout>

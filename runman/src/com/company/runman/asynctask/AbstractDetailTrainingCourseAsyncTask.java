@@ -75,7 +75,6 @@ public abstract class AbstractDetailTrainingCourseAsyncTask extends AbstractAsyn
             TrainingCourseVO vo = (TrainingCourseVO) new GsonUtils().stringToObject(dataArrStr, TrainingCourseVO.class);
             Gson gson = new GsonUtils().getGson();
             if(time_list!=null){
-
                 JsonParser parser = new JsonParser();
                 JsonArray Jarray = parser.parse(time_list).getAsJsonArray();
                 List<TimeScheduleRelationVO> tmpList  = new ArrayList<TimeScheduleRelationVO>();
@@ -89,7 +88,7 @@ public abstract class AbstractDetailTrainingCourseAsyncTask extends AbstractAsyn
             }
 
 //                IntentUtils.startTrainingCourseEditActivity(mContext, vo);
-            IntentUtils.startTrainingCourseEditActivity(mContext, vo);
+//            IntentUtils.startTrainingCourseDetailActivity(mContext, vo);
         } catch (Exception e) {
             TraceUtil.traceThrowableLog(e);
             DialogUtils.alertErrMsg(mContext,TAG+ "onPostExecute:" + e.getMessage());

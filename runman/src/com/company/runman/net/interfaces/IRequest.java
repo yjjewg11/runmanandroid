@@ -4,6 +4,7 @@ import android.content.Context;
 import com.company.news.query.PaginationData;
 import com.company.runman.utils.GsonUtils;
 import com.company.runman.utils.InvokeUtils;
+import com.company.runman.utils.Tool;
 import com.google.gson.Gson;
 import com.company.runman.datacenter.provider.SharePreferenceProvider;
 import com.company.runman.utils.Constant;
@@ -73,7 +74,7 @@ public abstract class IRequest {
     public String getUrl(){
         StringBuffer sb = new StringBuffer();
         String param=getParmString();
-        sb.append(Constant.Host.BASE_HOST).append(reuqestUrl);
+        sb.append( Tool.getFullUrl(reuqestUrl));
         if(param==null)return sb.toString();
         return sb.append("?").append(param).toString();
     }

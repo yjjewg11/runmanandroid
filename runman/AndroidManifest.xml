@@ -78,6 +78,12 @@
                   android:launchMode="singleTask"/>
         <activity android:name="com.company.runman.activity.CalendarViewMainActivity"
                   android:launchMode="singleTask"/>
+        <activity android:name="com.company.runman.activity.TrainingCourseDetailActivity"
+                  android:launchMode="singleTask"/>
+        <activity android:name="com.company.runman.activity.TrainingCourseDetailSubscribeActivity"
+                  android:launchMode="singleTask"/>
+
+
 
         <!--<activity android:name="com.company.runman.activity.CodeScanResultActivity"-->
                   <!--android:screenOrientation="portrait"/>-->

@@ -1,17 +1,21 @@
 package com.company.runman.activity.Adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.company.news.vo.TrainingCourseVO;
 import com.company.news.vo.UserVO;
 import com.company.runman.R;
 import com.company.runman.asynctask.AbstractDetailTrainingCourseAsyncTask;
 import com.company.runman.asynctask.AbstractPullToRefreshListAsyncTask;
+import com.company.runman.cache.ImgDownCache;
 import com.company.runman.utils.IntentUtils;
+import com.company.runman.utils.Tool;
 import com.company.runman.utils.TraceUtil;
 import com.company.runman.utils.VOUtils;
 
@@ -57,6 +61,8 @@ public class CoachListAdapter extends DefaultAdapter {
             h.age=(TextView)convertView.findViewById(R.id.age);
             h.city=(TextView)convertView.findViewById(R.id.city);
 
+           ;
+
 
             UserVO d=(UserVO)this.mList.get(position);
             h.coach_course_list_btn=(Button)convertView.findViewById(R.id.coach_course_list_btn);
@@ -65,10 +71,16 @@ public class CoachListAdapter extends DefaultAdapter {
 
 
             try{
+
+
+
                 h.name.setText(d.getName());
                 h.sex.setText(VOUtils.sexToString(d.getSex()));
                 h.city.setText(VOUtils.objectToString(d.getCity()));
                 h.age.setText(VOUtils.birthToString(d.getBirth()));
+                if(!TextUtils.isEmpty(d.getHead_imgurl())) {
+                    ImgDownCache.getInstance(context).displayImage(Tool.getFullUrl(d.getHead_imgurl()),  (ImageView)convertView.findViewById(R.id.imageView));
+                }
             }catch (Exception ex){
                 TraceUtil.traceThrowableLog( ex);
             }

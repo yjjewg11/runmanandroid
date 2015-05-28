@@ -43,7 +43,7 @@
                       android:textSize="@dimen/login_input_text_size"
                       android:background="@null"
                       android:gravity="center_vertical"
-                      android:singleLine="true"/>
+                      android:singleLine="true" android:layout_alignParentEnd="true" android:inputType="phone"/>
 
             <ImageView android:layout_width="match_parent"
                        android:layout_height="wrap_content"

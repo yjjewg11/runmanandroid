@@ -1,20 +1,25 @@
 package com.company.runman.activity.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
-import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 import com.company.news.validate.CommonsValidate;
 import com.company.news.vo.TimeScheduleRelationVO;
+import com.company.news.vo.TrainingCourseVO;
 import com.company.runman.R;
-import com.company.runman.utils.IntentUtils;
-import com.company.runman.utils.Tool;
-import com.company.runman.utils.TraceUtil;
+import com.company.runman.activity.TrainingCourseDetailSubscribeActivity;
+import com.company.runman.utils.*;
 import com.company.runman.widget.DialogUtils;
+import com.google.zxing.common.StringUtils;
 
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -24,19 +29,22 @@ public class TimesScheduleRelationWeekShowItemAdapter extends DefaultAdapter {
     private Context context;
     private LayoutInflater inflater;
     private int id;
+    private Calendar week1Cal;
+     private TrainingCourseVO vo;
 
-    private Object lastItem;
-    public TimesScheduleRelationWeekShowItemAdapter(Context context) {
-        super(context);
-        this.context = context;
+    public Calendar getWeek1Cal() {
+        return week1Cal;
     }
 
-    public TimesScheduleRelationWeekShowItemAdapter(int item, Context context, List data){
+    public void setWeek1Cal(Calendar week1Cal) {
+        this.week1Cal = week1Cal;
+    }
+
+    private Object lastItem;
+    public TimesScheduleRelationWeekShowItemAdapter(Context context,TrainingCourseVO vo) {
         super(context);
         this.context = context;
-        this.id=item;
-        inflater=LayoutInflater.from(context);
-        this.mList=data;
+        this.vo=vo;
     }
     @Override
     public Object getItem(int position) {
@@ -53,7 +61,7 @@ public class TimesScheduleRelationWeekShowItemAdapter extends DefaultAdapter {
         if(convertView==null){
             convertView=LayoutInflater.from(context).inflate(R.layout.times_schedule_relation_week_show_item, null);
             HolderView h=new HolderView();
-            h.textView_start_end_time=(EditText)convertView.findViewById(R.id.textView_start_end_time);
+            h.textView_start_end_time=(TextView)convertView.findViewById(R.id.textView_start_end_time);
 
             TimeScheduleRelationVO d=(TimeScheduleRelationVO)this.mList.get(position);
 
@@ -63,29 +71,45 @@ public class TimesScheduleRelationWeekShowItemAdapter extends DefaultAdapter {
                     String[] tmpStrArr=d.getDays().split(",");
                     for(int i=0;i<tmpStrArr.length;i++){
                         String tmpStr=tmpStrArr[i];
+                        View tmpView=null;
                         if(CommonsValidate.isDecimal(tmpStr)){
-                            switch (Integer.valueOf(tmpStr)){
+                            Integer tmpWeekNumber=Integer.valueOf(tmpStr);
+                            switch (tmpWeekNumber){
                                 case 1:
-                                    convertView.findViewById(R.id.checkBox_week1).setOnClickListener(new WeekOnClick(d));
-                                    ((CheckBox)convertView.findViewById(R.id.checkBox_week1)).setVisibility(View.VISIBLE);
+                                    tmpView=convertView.findViewById(R.id.Button_week1);
+                                    tmpView.setOnClickListener(new WeekOnClick(d,tmpWeekNumber));
+                                    tmpView.setVisibility(View.VISIBLE);
                                     break;
                                 case 2:
-                                    ((CheckBox)convertView.findViewById(R.id.checkBox_week2)).setVisibility(View.VISIBLE);
+                                    tmpView=convertView.findViewById(R.id.Button_week2);
+                                    tmpView.setOnClickListener(new WeekOnClick(d,tmpWeekNumber));
+                                    tmpView.setVisibility(View.VISIBLE);
                                     break;
                                 case 3:
-                                    ((CheckBox)convertView.findViewById(R.id.checkBox_week3)).setVisibility(View.VISIBLE);;
+                                    tmpView=convertView.findViewById(R.id.Button_week3);
+                                    tmpView.setOnClickListener(new WeekOnClick(d,tmpWeekNumber));
+                                    tmpView.setVisibility(View.VISIBLE);
                                     break;
                                 case 4:
-                                    ((CheckBox)convertView.findViewById(R.id.checkBox_week4)).setVisibility(View.VISIBLE);
+                                    tmpView=convertView.findViewById(R.id.Button_week4);
+                                    tmpView.setOnClickListener(new WeekOnClick(d,tmpWeekNumber));
+                                    tmpView.setVisibility(View.VISIBLE);
                                     break;
                                 case 5:
-                                    ((CheckBox)convertView.findViewById(R.id.checkBox_week5)).setVisibility(View.VISIBLE);
+                                    tmpView=convertView.findViewById(R.id.Button_week5);
+                                    tmpView.setOnClickListener(new WeekOnClick(d,tmpWeekNumber));
+                                    tmpView.setVisibility(View.VISIBLE);
                                     break;
                                 case 6:
-                                    ((CheckBox)convertView.findViewById(R.id.checkBox_week6)).setVisibility(View.VISIBLE);
+                                    tmpView=convertView.findViewById(R.id.Button_week6);
+                                    tmpView.setOnClickListener(new WeekOnClick(d,tmpWeekNumber));
+                                    tmpView.setVisibility(View.VISIBLE);
                                     break;
                                 case 7:
-                                    ((CheckBox)convertView.findViewById(R.id.checkBox_week7)).setVisibility(View.VISIBLE);
+
+                                    tmpView=convertView.findViewById(R.id.Button_week7);
+                                    tmpView.setOnClickListener(new WeekOnClick(d,tmpWeekNumber));
+                                    tmpView.setVisibility(View.VISIBLE);
                                     break;
 
                             }
@@ -96,6 +120,7 @@ public class TimesScheduleRelationWeekShowItemAdapter extends DefaultAdapter {
 
             }catch (Exception ex){
                 TraceUtil.traceThrowableLog( ex);
+                DialogUtils.alertErrMsg(context,TAG+ ex.getMessage());
             }
 
             convertView.setTag(h);
@@ -104,21 +129,48 @@ public class TimesScheduleRelationWeekShowItemAdapter extends DefaultAdapter {
     }
 
     class HolderView {
-        private EditText textView_start_end_time;
+        private TextView textView_start_end_time;
 
 
     }
 
     public class WeekOnClick implements AdapterView.OnClickListener{
         TimeScheduleRelationVO d;
-
-        public WeekOnClick(TimeScheduleRelationVO d) {
+        Integer weekNumber;
+        public WeekOnClick(TimeScheduleRelationVO d,Integer weekNumber) {
             this.d = d;
+            this.weekNumber=weekNumber;
         }
 
         @Override
         public void onClick(View view) {
-            IntentUtils.startTrainingCourseDetailSubscribeActivity(context, d);
+//            IntentUtils.startTrainingCourseDetailSubscribeActivity(context, d);
+            week1Cal.add(Calendar.DAY_OF_MONTH, weekNumber-1);
+            if(d.getStart_time()==null){
+                Toast.makeText(context,"数据异常，开始时间是空！", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            String[] strArr=d.getStart_time().split(":");
+            week1Cal.set(Calendar.HOUR_OF_DAY,Integer.valueOf(strArr[0]));
+            if(strArr.length>1){
+                week1Cal.set(Calendar.MINUTE,Integer.valueOf(strArr[1]));
+            }else{
+                week1Cal.set(Calendar.MINUTE,Integer.valueOf(0));
+            }
+            if(strArr.length>2){
+                week1Cal.set(Calendar.SECOND,Integer.valueOf(strArr[2]));
+            }else{
+                week1Cal.set(Calendar.SECOND,Integer.valueOf(0));
+            }
+            Intent intent = new Intent(context, TrainingCourseDetailSubscribeActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(Constant.ResponseData.DATA, null);
+                bundle.putSerializable(Constant.ResponseData.Subscribe_Date, week1Cal.getTime() );
+                bundle.putSerializable(Constant.ResponseData.TrainingCourseVO,vo);
+                bundle.putSerializable(Constant.ResponseData.TimeScheduleRelationVO, d );
+
+                intent.putExtras(bundle);
+            context.startActivity(intent);
         }
     }
 

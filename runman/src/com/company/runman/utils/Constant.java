@@ -137,6 +137,10 @@ public class Constant {
         public static final String DATA = "data";
         public static final String ResMsg = "ResMsg";
         public static final String DATA_ID ="data_id";
+        public static final String Subscribe_Date ="subscribe_date";
+        public static final String TimeScheduleRelationVO ="TimeScheduleRelationVO";
+        public static final String TrainingCourseVO ="TrainingCourseVO";
+
     }
     public static final class Query {
         static public  Integer Operate_Refresh=0;//刷新操作
