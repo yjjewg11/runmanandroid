@@ -52,6 +52,7 @@ public class MyInfoActivity extends BaseActivity {
     public static PullToRefreshListView listView;
 
     private Button button_more;
+    private Button button_coach_list;
 
 
     View view;
@@ -186,6 +187,12 @@ public class MyInfoActivity extends BaseActivity {
 
         button_more=(Button) findViewById(R.id.button_more);
         button_more.setOnClickListener(this);
+
+        button_coach_list=(Button) findViewById(R.id.button_coach_list);
+        button_coach_list.setOnClickListener(this);
+
+        ((Button) findViewById(R.id.button_my_traing)).setOnClickListener(this);
+
     }
 
     @Override
@@ -198,9 +205,17 @@ public class MyInfoActivity extends BaseActivity {
             case R.id.add_training_plan:
                 IntentUtils.startTrainingPlanEditActivity(mContext, null);
                 break;
+            case R.id.button_coach_list:
+                mContext.startActivity(new Intent(mContext,CoachListActivity.class));;
+                break;
             case R.id.button_more:
                 showPopupWindow(view);
                 break;
+            case R.id.button_my_traing:
+                mContext.startActivity(new Intent(mContext,CalendarViewMainActivity.class));;
+                break;
+
+
         }
 
 

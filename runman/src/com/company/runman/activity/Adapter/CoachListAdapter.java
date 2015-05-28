@@ -4,10 +4,16 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import com.company.news.vo.TrainingCourseVO;
+import com.company.news.vo.UserVO;
 import com.company.runman.R;
+import com.company.runman.asynctask.AbstractDetailTrainingCourseAsyncTask;
+import com.company.runman.asynctask.AbstractPullToRefreshListAsyncTask;
+import com.company.runman.utils.IntentUtils;
 import com.company.runman.utils.TraceUtil;
+import com.company.runman.utils.VOUtils;
 
 import java.util.List;
 
@@ -43,42 +49,67 @@ public class CoachListAdapter extends DefaultAdapter {
         HolderView holderView;
         //优化ListView
         if(convertView==null){
-            convertView=LayoutInflater.from(context).inflate(R.layout.my_traininng_course_item, null);
+            convertView=LayoutInflater.from(context).inflate(R.layout.coach_list_item_layout, null);
             HolderView h=new HolderView();
-            h.title=(TextView)convertView.findViewById(R.id.title);
-          //  h.exercise_mode=(TextView)convertView.findViewById(R.id.exercise_mode);
+            h.name=(TextView)convertView.findViewById(R.id.name);
+            h.sex=(TextView)convertView.findViewById(R.id.sex);
 
-            h.price=(TextView)convertView.findViewById(R.id.price);
-//            h.status=(TextView)convertView.findViewById(R.id.status);
+            h.age=(TextView)convertView.findViewById(R.id.age);
+            h.city=(TextView)convertView.findViewById(R.id.city);
 
-            TrainingCourseVO d=(TrainingCourseVO)this.mList.get(position);
+
+            UserVO d=(UserVO)this.mList.get(position);
+            h.coach_course_list_btn=(Button)convertView.findViewById(R.id.coach_course_list_btn);
+            h.coach_course_list_btn.setOnClickListener(new CourseOnClickListener(d.getId()));
+
+
 
             try{
-                h.title.setText(d.getTitle());
-//                if(Integer.valueOf(2).equals(d.getExercise_mode())){
-//                    h.exercise_mode.setText("马拉松");
-//                }else{
-//                    h.exercise_mode.setText("普通跑步");
-//                }
-
-
-                h.price.setText("价格:"+d.getPrice());
-
+                h.name.setText(d.getName());
+                h.sex.setText(VOUtils.sexToString(d.getSex()));
+                h.city.setText(VOUtils.objectToString(d.getCity()));
+                h.age.setText(VOUtils.birthToString(d.getBirth()));
             }catch (Exception ex){
                 TraceUtil.traceThrowableLog( ex);
             }
-
             convertView.setTag(h);
         }
         return convertView;
     }
 
     class HolderView {
-        private TextView title;
-      //  private TextView exercise_mode;
-        private TextView price;
-        private TextView status;
-
+        private TextView name;
+        private TextView city;
+        private TextView sex;
+        private TextView age;
+        private TextView trainer_star_level;
+        private Button button_chat;
+        private Button coach_course_list_btn;
     }
+
+
+    protected class CourseOnClickListener implements View.OnClickListener {
+        Long id;
+
+        public CourseOnClickListener(Long id) {
+            this.id = id;
+        }
+
+        @Override
+        public void onClick(View view) {
+
+
+            IntentUtils.startTrainingCourseListActivity(context, id);
+
+//            new AbstractDetailTrainingCourseAsyncTask(context, id.toString()) {
+//                public    void onPostExecute2(TrainingCourseVO vo){
+//                    IntentUtils.startTrainingCourseDetailActivity(context, vo);
+//                }
+//            }.execute();
+        }
+    }
+
+
+
 
 }

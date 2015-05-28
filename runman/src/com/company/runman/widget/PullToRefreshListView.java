@@ -13,6 +13,7 @@ import android.view.animation.RotateAnimation;
 import android.widget.*;
 import android.widget.AbsListView.OnScrollListener;
 import com.company.runman.R;
+import com.company.runman.activity.Adapter.DefaultAdapter;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -143,9 +144,20 @@ public class PullToRefreshListView extends ListView implements OnScrollListener 
         setSelection(1);		// 设置当前选中的项
     }
 
+    private DefaultAdapter DefaultAdapter;
+
+    public DefaultAdapter getDefaultAdapter() {
+        return DefaultAdapter;
+    }
+
+    public void setDefaultAdapter(DefaultAdapter defaultAdapter) {
+        DefaultAdapter = defaultAdapter;
+    }
+
     @Override
     public void setAdapter(ListAdapter adapter) {
         super.setAdapter(adapter);
+        setDefaultAdapter((DefaultAdapter)adapter);
 
         setSelection(1);
     }

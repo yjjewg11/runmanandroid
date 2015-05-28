@@ -6,9 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
-import com.company.runman.activity.TrainingCourseEditActivity;
-import com.company.runman.activity.TrainingPlanDetailActivity;
-import com.company.runman.activity.TrainingPlanEditActivity;
+import com.company.runman.activity.*;
 import com.company.runman.datacenter.provider.SharePreferenceProvider;
 
 import java.io.Serializable;
@@ -49,7 +47,20 @@ public class IntentUtils {
         }
         mContext.startActivity(intent);
     }
-
+    /**
+     * 跳转详细训练课程模块
+     * @param mContext
+     * @param data
+     */
+    public static void startTrainingCourseDetailActivity(Context mContext,Serializable data) {
+        Intent intent = new Intent(mContext, TrainingCourseDetailActivity.class);
+        if(data!=null){
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(Constant.ResponseData.DATA,  data);
+            intent.putExtras(bundle);
+        }
+        mContext.startActivity(intent);
+    }
 
     /**
      * 跳转编辑训练计划模块
@@ -98,5 +109,29 @@ public class IntentUtils {
         cookieManager.setCookie(Constant.Host.BASE_HOST, Constant.SharePreferenceKey.KEY_JSESSIONID + "=" + JSESSIONID);
 
         CookieSyncManager.getInstance().sync();
+    }
+    /**
+     * 跳转课程查询模块，可以传入查询条件
+     * @param mContext
+     * @param data
+     */
+    public static void startTrainingCourseListActivity(Context mContext,Serializable data) {
+        Intent intent = new Intent(mContext, TrainingCourseListPublishActivity.class);
+        if(data!=null){
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(Constant.ResponseData.DATA,  data);
+            intent.putExtras(bundle);
+        }
+        mContext.startActivity(intent);
+    }
+
+    public static void startTrainingCourseDetailSubscribeActivity(Context mContext,Serializable data) {
+        Intent intent = new Intent(mContext, TrainingCourseDetailSubscribeActivity.class);
+        if(data!=null){
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(Constant.ResponseData.DATA,  data);
+            intent.putExtras(bundle);
+        }
+        mContext.startActivity(intent);
     }
 }

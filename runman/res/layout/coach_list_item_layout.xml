@@ -4,8 +4,7 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <com.company.runman.view.HeaderView android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"/>
+
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
@@ -28,21 +27,28 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="教练名"
-                        android:id="@+id/textView"/>
+                        android:id="@+id/name"/>
                 <TextView
                         android:layout_width="0dp"
                         android:layout_weight="1.0"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="男"
-                        android:id="@+id/textView2"/>
+                        android:id="@+id/sex"/>
                 <TextView
                         android:layout_width="0dp"
                         android:layout_weight="1.0"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="32岁"
-                        android:id="@+id/textView3"/>
+                        android:id="@+id/age"/>
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1.0"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="地点"
+                        android:id="@+id/city"/>
             </LinearLayout>
             <LinearLayout
                     android:orientation="horizontal"
@@ -51,23 +57,23 @@
                 <TextView  android:layout_width="0dp"
                            android:layout_weight="1.0" android:layout_height="wrap_content"
                           android:textAppearance="?android:attr/textAppearanceLarge" android:text="星级：*****"
-                          android:id="@+id/textView4"/>
+                          android:id="@+id/trainer_star_level"/>
                 <Button
                         style="?android:attr/buttonStyleSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="聊天"
-                        android:id="@+id/button"/>
+                        android:id="@+id/button_chat"/>
                 <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="拥有课程"
-                        android:id="@+id/caach_course_detail_btn"/>
+                        android:id="@+id/coach_course_list_btn"/>
             </LinearLayout>
         </LinearLayout>
         <ListView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/listView"/>
+                android:id="@+id/listView_coach"/>
     </LinearLayout>
 </LinearLayout>
