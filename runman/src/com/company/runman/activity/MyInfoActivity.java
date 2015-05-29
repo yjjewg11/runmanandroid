@@ -243,6 +243,18 @@ public class MyInfoActivity extends BaseActivity {
         ((Button) view.findViewById(R.id.button_Coach_apply)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+                String userinfoStr = SharePreferenceProvider.getInstance(mContext).getUserinfo();
+                UserInfoReturn user=(UserInfoReturn)new GsonUtils().stringToObject(userinfoStr, UserInfoReturn.class);
+
+                if(Integer.valueOf(1).equals(user.getMarathon_verify())){
+                    Intent intent = new Intent(mContext, CoachInfoActivity.class);
+                    startActivity(intent);
+                    pop.dismiss();
+                    return;
+                }
+
                 Intent intent = new Intent(mContext, CoachModifyActivity.class);
                 startActivity(intent);
                 pop.dismiss();

@@ -6,10 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.Toast;
+import android.widget.*;
 import com.company.news.jsonform.TrainingPlanJsonform;
 import com.company.news.jsonform.UserRegJsonform;
 import com.company.news.validate.CommonsValidate;
@@ -45,7 +42,8 @@ public class TrainingPlanEditActivity extends BaseActivity {
     private EditText run_times;
     private EditText price;
     private View save_btn;
-
+private LinearLayout runKM_layout;
+    private LinearLayout run_times_layout;
 
 
     @Override
@@ -53,6 +51,11 @@ public class TrainingPlanEditActivity extends BaseActivity {
         setHeaderTitle("编辑");
     }
 
+
+    void exercise_modeChecked_show(int v){
+        run_times_layout.setVisibility(v);
+        runKM_layout.setVisibility(v);
+    }
     @Override
     public void initData() {
         Intent intent = this.getIntent();
@@ -68,7 +71,9 @@ public class TrainingPlanEditActivity extends BaseActivity {
         }
         if(Integer.valueOf(2).equals(vo.getExercise_mode())){
             exercise_mode2.setChecked(true);
+            exercise_modeChecked_show(View.VISIBLE);
         }else{
+            exercise_modeChecked_show(View.GONE);
             exercise_mode1.setChecked(true);
         }
         runKM.setText(Tool.objectToString(vo.getRunKM()));
@@ -83,9 +88,19 @@ public class TrainingPlanEditActivity extends BaseActivity {
 
     @Override
     public void setContentView() {
+
+
         setContentView(R.layout.training_plan_edit_layout);
         exercise_mode1 = (RadioButton) findViewById(R.id.exercise_mode1);
+        exercise_mode1.setOnClickListener(this);
         exercise_mode2 = (RadioButton) findViewById(R.id.exercise_mode2);
+        exercise_mode2.setOnClickListener(this);
+
+
+        runKM_layout=(LinearLayout) findViewById(R.id.runKM_layout);
+        run_times_layout=(LinearLayout) findViewById(R.id.run_times_layout);
+
+
         start_date = (EditText) findViewById(R.id.start_date);
         DialogUtils.showDateDialogBind(start_date);
 
@@ -108,68 +123,83 @@ public class TrainingPlanEditActivity extends BaseActivity {
     @Override
     public void onClick(View v) {
         super.onClick(v);
-        if(v == save_btn) {
-            if(!Tool.isConnection(mContext)) {
-                Toast.makeText(mContext, R.string.network_offline, Toast.LENGTH_SHORT).show();
-                return;
-            } else if(TextUtils.isEmpty(place.getText())){
-                Toast.makeText(mContext, "地点不能为空!", Toast.LENGTH_SHORT).show();
-                return;
-            } else if(TextUtils.isEmpty(price.getText())) {
-                Toast.makeText(mContext, "价格不能为空!", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            String start_date_Str=start_date.getText().toString();
-            if(TextUtils.isEmpty(start_date_Str)){
-                Toast.makeText(mContext, "开始日期不能为空!", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            if(!StringUtils.isNumeric(runKM.getText().toString())){
-                Toast.makeText(mContext, "距离不是有效数据!", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            if(!StringUtils.isNumeric(run_times.getText().toString())){
-                Toast.makeText(mContext, "运动时间不是有效数据!", Toast.LENGTH_SHORT).show();
-                return;
 
-            }
+        switch (v.getId()) {
+            case R.id.exercise_mode1:
+                runKM.setText("");
+                run_times.setText("");
+                exercise_modeChecked_show(View.GONE);
+                break;
+            case R.id.exercise_mode2:
+                runKM.setText("");
+                run_times.setText("");
+                exercise_modeChecked_show(View.VISIBLE);
+                break;
+
+            case R.id.save_btn:
+                if(!Tool.isConnection(mContext)) {
+                    Toast.makeText(mContext, R.string.network_offline, Toast.LENGTH_SHORT).show();
+                    return;
+                } else if(TextUtils.isEmpty(place.getText())){
+                    Toast.makeText(mContext, "地点不能为空!", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if(TextUtils.isEmpty(price.getText())) {
+                    Toast.makeText(mContext, "价格不能为空!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                String start_date_Str=start_date.getText().toString();
+                if(TextUtils.isEmpty(start_date_Str)){
+                    Toast.makeText(mContext, "开始日期不能为空!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(!StringUtils.isNumeric(runKM.getText().toString())){
+                    Toast.makeText(mContext, "距离不是有效数据!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(!StringUtils.isNumeric(run_times.getText().toString())){
+                    Toast.makeText(mContext, "运动时间不是有效数据!", Toast.LENGTH_SHORT).show();
+                    return;
+
+                }
 
 
-            if(!CommonsValidate.isDecimal(price.getText().toString())) {
-                Toast.makeText(mContext, "价格不是有效数据!", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            if(form==null){//创建
-                form = new TrainingPlanJsonform();
-            }
-            if(exercise_mode2.isChecked()){
-                form.setExercise_mode(2);
-            }else{
-                form.setExercise_mode(1);
-            }
-            try{
+                if(!CommonsValidate.isDecimal(price.getText().toString())) {
+                    Toast.makeText(mContext, "价格不是有效数据!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(form==null){//创建
+                    form = new TrainingPlanJsonform();
+                }
+                if(exercise_mode2.isChecked()){
+                    form.setExercise_mode(2);
+                }else{
+                    form.setExercise_mode(1);
+                }
+                try{
 
-            form.setStart_time(TimeUtils.getTimestamp(start_date_Str, start_time.getText().toString()));
-            form.setEnd_time(TimeUtils.getTimestamp(start_date_Str,end_time.getText().toString()));
+                    form.setStart_time(TimeUtils.getTimestamp(start_date_Str, start_time.getText().toString()));
+                    form.setEnd_time(TimeUtils.getTimestamp(start_date_Str,end_time.getText().toString()));
 
-            form.setPlace(place.getText().toString());
-            if(!TextUtils.isEmpty(runKM.getText())){
-                form.setRunKM(Tool.convertInteger(runKM.getText().toString()));
-            }
-            if(!TextUtils.isEmpty(run_times.getText())){
-                form.setRun_times(Tool.convertInteger(run_times.getText().toString()));
-            }
+                    form.setPlace(place.getText().toString());
+                    if(!TextUtils.isEmpty(runKM.getText())){
+                        form.setRunKM(Tool.convertInteger(runKM.getText().toString()));
+                    }
+                    if(!TextUtils.isEmpty(run_times.getText())){
+                        form.setRun_times(Tool.convertInteger(run_times.getText().toString()));
+                    }
 
-            if(!TextUtils.isEmpty(price.getText())){
-                form.setPrice(Tool.convertDouble(price.getText().toString()));
-            }
+                    if(!TextUtils.isEmpty(price.getText())){
+                        form.setPrice(Tool.convertDouble(price.getText().toString()));
+                    }
 
-            }catch (Exception e){
-                TraceUtil.traceLog(TAG+"::"+e.getMessage());
-            }
+                }catch (Exception e){
+                    TraceUtil.traceLog(TAG+"::"+e.getMessage());
+                }
 
-            showProgress(getString(R.string.progress_text));
-            new SaveAsyncTask(form).execute("");
+                showProgress(getString(R.string.progress_text));
+                new SaveAsyncTask(form).execute("");
+                break;
+            //end save_btn
         }
     }
 
