@@ -191,6 +191,9 @@ public class MyInfoActivity extends BaseActivity {
         button_coach_list=(Button) findViewById(R.id.button_coach_list);
         button_coach_list.setOnClickListener(this);
 
+        findViewById(R.id.button_userRelationTrainingCourse_query_subscribe_my).setOnClickListener(this);
+
+
         ((Button) findViewById(R.id.button_my_traing)).setOnClickListener(this);
 
     }
@@ -207,6 +210,10 @@ public class MyInfoActivity extends BaseActivity {
                 break;
             case R.id.button_coach_list:
                 mContext.startActivity(new Intent(mContext,CoachListActivity.class));;
+                break;
+            case R.id.button_userRelationTrainingCourse_query_subscribe_my:
+                String url="rest/userRelationTrainingCourse/query/subscribe/my.json";
+                IntentUtils.startUserRelationTrainingCourseListActivity(mContext,url);
                 break;
             case R.id.button_more:
                 showPopupWindow(view);

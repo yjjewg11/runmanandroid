@@ -193,6 +193,10 @@ public class CoachInfoActivity extends BaseActivity {
         button_training_course.setOnClickListener(this);
 
         button_partner_training.setOnClickListener(this);
+        findViewById(R.id.button_userRelationTrainingCourse_query_myCourse_sales).setOnClickListener(this);
+
+
+
 
         button_more=(Button) findViewById(R.id.button_more);
         button_more.setOnClickListener(this);
@@ -210,6 +214,10 @@ public class CoachInfoActivity extends BaseActivity {
                 break;
             case R.id.button_partner_training:
                //
+                break;
+            case R.id.button_userRelationTrainingCourse_query_myCourse_sales:
+                String url="rest/userRelationTrainingCourse/query/myCourse/sales.json";
+                IntentUtils.startUserRelationTrainingCourseListActivity(mContext,url);
                 break;
             case R.id.button_training_course:
 

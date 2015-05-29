@@ -82,6 +82,8 @@
                   android:launchMode="singleTask"/>
         <activity android:name="com.company.runman.activity.TrainingCourseDetailSubscribeActivity"
                   android:launchMode="singleTask"/>
+        <activity android:name="com.company.runman.activity.UserRelationTrainingCourseListActivity"
+                  android:launchMode="singleTask"/>
 
 
 

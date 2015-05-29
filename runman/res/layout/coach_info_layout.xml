@@ -52,6 +52,12 @@
                 android:layout_width="0dp"
                 android:layout_weight="1.0"
                 android:layout_height="wrap_content"
+                android:text="课程销量"
+                android:id="@+id/button_userRelationTrainingCourse_query_myCourse_sales"/>
+        <Button
+                android:layout_width="0dp"
+                android:layout_weight="1.0"
+                android:layout_height="wrap_content"
                 android:text="课程管理"
                 android:id="@+id/button_training_course"/>
 

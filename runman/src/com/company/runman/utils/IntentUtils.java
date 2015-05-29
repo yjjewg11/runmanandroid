@@ -62,6 +62,17 @@ public class IntentUtils {
         mContext.startActivity(intent);
     }
 
+    public static void startUserRelationTrainingCourseListActivity(Context mContext,String url) {
+        Intent intent = new Intent(mContext, UserRelationTrainingCourseListActivity.class);
+        if(url!=null){
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("url",  url);
+            intent.putExtras(bundle);
+        }
+        mContext.startActivity(intent);
+    }
+
+
     /**
      * 跳转编辑训练计划模块
      * @param mContext

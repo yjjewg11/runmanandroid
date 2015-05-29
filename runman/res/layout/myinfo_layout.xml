@@ -57,6 +57,12 @@
                 android:layout_width="0dp"
                 android:layout_weight="1.0"
                 android:layout_height="wrap_content"
+                android:text="我的课程"
+                android:id="@+id/button_userRelationTrainingCourse_query_subscribe_my"/>
+        <Button
+                android:layout_width="0dp"
+                android:layout_weight="1.0"
+                android:layout_height="wrap_content"
                 android:text="教练列表"
                 android:id="@+id/button_coach_list"/>
 
