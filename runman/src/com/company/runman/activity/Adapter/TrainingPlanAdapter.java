@@ -9,6 +9,7 @@ import com.company.news.usershow.TrainingPlanUsershow;
 import com.company.news.vo.TrainingPlanVO;
 import com.company.runman.R;
 import com.company.runman.utils.TimeUtils;
+import com.company.runman.utils.Tool;
 import com.company.runman.utils.TraceUtil;
 
 import java.util.List;
@@ -42,24 +43,26 @@ public class TrainingPlanAdapter extends DefaultAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        HolderView holderView;
-        //优化ListView
-        if(convertView==null){
+        HolderView h;
+        if (convertView == null) {
+            h = new HolderView();
             convertView=LayoutInflater.from(context).inflate(R.layout.traininng_plan_item, null);
-            HolderView h=new HolderView();
             h.start_day=(TextView)convertView.findViewById(R.id.start_day);
             h.place=(TextView)convertView.findViewById(R.id.place);
             h.run_times=(TextView)convertView.findViewById(R.id.run_times);
             h.start_to_end_time=(TextView)convertView.findViewById(R.id.start_to_end_time);
             h.price=(TextView)convertView.findViewById(R.id.price);
             h.status=(TextView)convertView.findViewById(R.id.status);
-
+            convertView.setTag(h);
+        } else {
+            h = (HolderView) convertView.getTag();
+        };
             TrainingPlanVO d=(TrainingPlanVO)this.mList.get(position);
 
             try{
                 h.start_day.setText(TimeUtils.getDateString(d.getStart_time()));
-                h.place.setText(d.getPlace());
-                h.run_times.setText(d.getRun_times()+"");
+                h.place.setText(Tool.objectToString(d.getPlace()));
+                h.run_times.setText(Tool.objectToString(d.getRun_times()));
                 h.start_to_end_time.setText(TimeUtils.getHourAndMinuteByDate(d.getStart_time()) + "~" + TimeUtils.getHourAndMinuteByDate(d.getEnd_time()));
                 h.price.setText("出价:"+d.getPrice());
                 h.status.setText(TrainingPlanUsershow.changeByStatus(d.getStatus()));
@@ -68,7 +71,7 @@ public class TrainingPlanAdapter extends DefaultAdapter {
             }
 
             convertView.setTag(h);
-        }
+
         return convertView;
     }
 

@@ -51,6 +51,7 @@ public class TrainingCourseDetailSubscribeActivity extends BaseActivity {
     private TextView course_time;
 
     private View save_btn;
+    private boolean isSaveMode=true;
 
     private Button button_add_time;
   //  private LinkedList mListItems;
@@ -68,6 +69,7 @@ public class TrainingCourseDetailSubscribeActivity extends BaseActivity {
     public void initData() {
          Intent intent = this.getIntent();
         Object dATA_ID=(Object)intent.getSerializableExtra(Constant.ResponseData.DATA_ID);
+
         if(dATA_ID!=null){
             String geturl= "rest/userRelationTrainingCourse/{uuid}.json";
             new AbstractDetailAsyncTask(dATA_ID,TrainingCourseDetailSubscribeActivity.this,geturl){
@@ -83,7 +85,11 @@ public class TrainingCourseDetailSubscribeActivity extends BaseActivity {
          subscribe_Date=(Date)intent.getSerializableExtra(Constant.ResponseData.Subscribe_Date);
          trainingCourseVO=(TrainingCourseVO)intent.getSerializableExtra(Constant.ResponseData.TrainingCourseVO);
          timeScheduleRelationVO=(TimeScheduleRelationVO)intent.getSerializableExtra(Constant.ResponseData.TimeScheduleRelationVO);
-
+        //from TimesScheduleRelationWeekShowItemAdapter
+       String mode=(String)intent.getSerializableExtra("mode");
+        intent.removeExtra("mode");
+        if("create".equals(mode))isSaveMode=true;
+        else isSaveMode=false;
 
         reloadData();
     }
@@ -91,15 +97,29 @@ public class TrainingCourseDetailSubscribeActivity extends BaseActivity {
      * 重新加载数据：1。新建.2.修改订单
      */
     public void reloadData() {
+
+        if(vo==null)vo=new UserRelationTrainingCourseVO();
         if(trainingCourseVO!=null){
-            title.setText(Tool.objectToString(trainingCourseVO.getTitle()));
-            time_length.setText(Tool.objectToString(trainingCourseVO.getTime_length()));
-            price.setText(Tool.objectToString(trainingCourseVO.getPrice()));
-            difficulty_degree.setText(Tool.objectToString(trainingCourseVO.getDifficulty_degree()));
-            place.setText(Tool.objectToString(trainingCourseVO.getPlace()));
+            vo.setCourse_id(trainingCourseVO.getId());
+            vo.setCourse_coach_id(trainingCourseVO.getId());
+            vo.setCourse_place(trainingCourseVO.getPlace());
+            vo.setCourse_price(trainingCourseVO.getPrice());
+            vo.setCourse_difficulty_degree(trainingCourseVO.getDifficulty_degree());
+            vo.setCourse_title(trainingCourseVO.getTitle());
+            vo.setCourse_time_length(trainingCourseVO.getTime_length());
             context.setText(Tool.objectToString(trainingCourseVO.getContext()));
         }
-        course_time.setText(TimeUtils.getTimeString(subscribe_Date));
+
+        if(subscribe_Date!=null){
+            vo.setCourse_time(TimeUtils.date2TimestampStart(subscribe_Date));
+        }
+        title.setText(Tool.objectToString(vo.getCourse_title()));
+        time_length.setText(Tool.objectToString(vo.getCourse_time_length()));
+        price.setText(Tool.objectToString( vo.getCourse_price()));
+        difficulty_degree.setText(Tool.objectToString( vo.getCourse_difficulty_degree()));
+        place.setText(Tool.objectToString(vo.getCourse_place()));
+
+        course_time.setText(TimeUtils.getTimeString(vo.getCourse_time()));
 
         if(vo.getId()==null){
             return;
@@ -123,6 +143,7 @@ public class TrainingCourseDetailSubscribeActivity extends BaseActivity {
         save_btn = findViewById(R.id.save_btn);
         save_btn.setOnClickListener(this);
 
+        if(!isSaveMode)save_btn.setVisibility(View.INVISIBLE);
 //        button_add_time =(Button)findViewById(R.id.button_add_time);
 //        button_add_time.setOnClickListener(this);
     };
@@ -186,7 +207,7 @@ public class TrainingCourseDetailSubscribeActivity extends BaseActivity {
 
     @Override
     public void finish() {
-//        Intent intent = new Intent(mContext, TrainingCourseListPublishActivity.class);
+//        Intent intent = new Intent(mContext, TrainingCourseListActivity.class);
 //        startActivity(intent);
         super.finish();
     }

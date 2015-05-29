@@ -33,6 +33,11 @@
                         android:layout_height="wrap_content"
                         android:text="修改资料"
                         android:id="@+id/modify_myinfo"/>
+                <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="添加陪练"
+                        android:id="@+id/button_queryPublish"/>
 
             </LinearLayout>
         </LinearLayout>

@@ -71,6 +71,24 @@ public class IntentUtils {
         }
         mContext.startActivity(intent);
     }
+    public static void startTrainingPlanListActivity(Context mContext,String url) {
+        Intent intent = new Intent(mContext, TrainingPlanListActivity.class);
+        if(url!=null){
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("url",  url);
+            intent.putExtras(bundle);
+        }
+        mContext.startActivity(intent);
+    }
+    public static void startTrainingCourseListActivity(Context mContext,String url) {
+        Intent intent = new Intent(mContext, TrainingCourseListActivity.class);
+        if(url!=null){
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("url",  url);
+            intent.putExtras(bundle);
+        }
+        mContext.startActivity(intent);
+    }
 
 
     /**
@@ -127,7 +145,7 @@ public class IntentUtils {
      * @param data
      */
     public static void startTrainingCourseListActivity(Context mContext,Serializable data) {
-        Intent intent = new Intent(mContext, TrainingCourseListPublishActivity.class);
+        Intent intent = new Intent(mContext, TrainingCourseListActivity.class);
         if(data!=null){
             Bundle bundle = new Bundle();
             bundle.putSerializable(Constant.ResponseData.DATA,  data);

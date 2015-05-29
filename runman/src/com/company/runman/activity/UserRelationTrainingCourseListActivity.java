@@ -2,14 +2,11 @@ package com.company.runman.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import com.company.news.query.NSearchContion;
-import com.company.news.vo.TrainingCourseVO;
+import com.company.news.vo.UserRelationTrainingCourseVO;
 import com.company.runman.R;
 import com.company.runman.activity.Adapter.DefaultAdapter;
-import com.company.runman.activity.Adapter.TrainingCoursePublishAdapter;
-import com.company.runman.asynctask.AbstractDetailTrainingCourseAsyncTask;
+import com.company.runman.activity.Adapter.UserRelationTrainingCourseListAdapter;
 import com.company.runman.asynctask.AbstractPullToRefreshListAsyncTask;
-import com.company.runman.utils.Constant;
 import com.company.runman.utils.GsonUtils;
 import com.company.runman.utils.IntentUtils;
 import com.company.runman.widget.PullToRefreshListView;
@@ -31,17 +28,13 @@ public class UserRelationTrainingCourseListActivity extends AbstractPullToRefres
         new TrainingCourseListPublishAsyncTask(mContext,operate,listView,url).execute();
     }
 
-    @Override
-    public void initData() {
-
-    }
 
     DefaultAdapter baseListAdapter;
     public  DefaultAdapter getBaseListAdapter(){
         Intent intent = this.getIntent();
         url=(String)intent.getSerializableExtra("url");
         if(baseListAdapter==null){
-            baseListAdapter= new TrainingCoursePublishAdapter(this);
+            baseListAdapter= new UserRelationTrainingCourseListAdapter(this);
 //            Intent intent = this.getIntent();
 //            Object userid=intent.getSerializableExtra(Constant.ResponseData.DATA);
 //            if(userid!=null){
@@ -54,20 +47,22 @@ public class UserRelationTrainingCourseListActivity extends AbstractPullToRefres
         return baseListAdapter;
     }
 
-    public  void listViewOnItemClick(TrainingCourseVO vo){
-        new AbstractDetailTrainingCourseAsyncTask(mContext, vo.getId().toString()) {
-            public    void onPostExecute2(TrainingCourseVO vo){
-                IntentUtils.startTrainingCourseDetailActivity(mContext, vo);
-            }
-        }.execute();
+    public  void listViewOnItemClick(Object o){
+
+        if(o instanceof UserRelationTrainingCourseVO){
+            UserRelationTrainingCourseVO vo=(UserRelationTrainingCourseVO)o;
+            IntentUtils.startTrainingCourseDetailSubscribeActivity(mContext, vo);
+        }
+
+
     }
 
     public  Integer getCurrActivityLayout(){
-        return R.layout.training_course_list_publish;
+        return R.layout.user_relation_training_course_list_layout;
     }
 
     public Integer getCurrActivityListView(){
-        return  R.id.listViewTrainingCourse;
+        return  R.id.listView;
     }
 
     public class TrainingCourseListPublishAsyncTask extends AbstractPullToRefreshListAsyncTask {
@@ -78,7 +73,7 @@ public class UserRelationTrainingCourseListActivity extends AbstractPullToRefres
         }
         public List jsonToList(String dataArrStr){
             Gson gson = new GsonUtils().getGson();
-            List<TrainingCourseVO> list = gson.fromJson(dataArrStr, new TypeToken<List<TrainingCourseVO>>() {
+            List<UserRelationTrainingCourseVO> list = gson.fromJson(dataArrStr, new TypeToken<List<UserRelationTrainingCourseVO>>() {
             }.getType());
             return list;
         }

@@ -31,6 +31,10 @@ public abstract class AbstractPullToRefreshListActivity extends BaseActivity {
 
     View view;
 
+    @Override
+    public void initData() {
+        asyncTaskExecute( Constant.Query.Operate_Refresh);
+    }
 
     /**
      * 执行异常查询任务
@@ -43,7 +47,7 @@ public abstract class AbstractPullToRefreshListActivity extends BaseActivity {
     protected void onStart() {
         super.onStart();
 //        new TrainingCourseListMyAsyncTask(this).execute();
-        asyncTaskExecute( Constant.Query.Operate_Refresh);
+
 
     }
 
@@ -74,7 +78,7 @@ public abstract class AbstractPullToRefreshListActivity extends BaseActivity {
      * item 点击触发事件
      * @param vo
      */
-    public abstract void listViewOnItemClick(TrainingCourseVO vo);
+    public abstract void listViewOnItemClick(Object vo);
 
 
     @Override
@@ -110,16 +114,9 @@ public abstract class AbstractPullToRefreshListActivity extends BaseActivity {
                     if (o == null) {
                         DialogUtils.alertErrMsg(mContext, arg2 + " index,mListItems.get() is null");
                     }
-                    if (o instanceof TrainingCourseVO) {
 
-                        listViewOnItemClick( (TrainingCourseVO) o);
+                    listViewOnItemClick( o);
 
-                        // showProgress("加载数据");
-                        // new EditTrainingCourseAsyncTask(tmp.getId().toString()).execute();
-
-                    }{
-
-                    }
 
                     // Toast.makeText(mContext, "" + arg2, Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
@@ -136,7 +133,6 @@ public abstract class AbstractPullToRefreshListActivity extends BaseActivity {
 
         listView.setAdapter(getBaseListAdapter());
 
-        asyncTaskExecute( Constant.Query.Operate_Refresh);
     }
 
 

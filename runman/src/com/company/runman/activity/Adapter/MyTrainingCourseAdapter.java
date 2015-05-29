@@ -43,20 +43,20 @@ public class MyTrainingCourseAdapter extends DefaultAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        HolderView holderView;
-        //优化ListView
-        if(convertView==null){
+        HolderView h;
+        if (convertView == null) {
             convertView=LayoutInflater.from(context).inflate(R.layout.my_traininng_course_item, null);
-            HolderView h=new HolderView();
+
+            h = new HolderView();
             h.title=(TextView)convertView.findViewById(R.id.title);
-          //  h.exercise_mode=(TextView)convertView.findViewById(R.id.exercise_mode);
-
+            //  h.exercise_mode=(TextView)convertView.findViewById(R.id.exercise_mode);
             h.price=(TextView)convertView.findViewById(R.id.price);
-//            h.status=(TextView)convertView.findViewById(R.id.status);
-
-            TrainingCourseVO d=(TrainingCourseVO)this.mList.get(position);
-
-            try{
+            convertView.setTag(h);
+        } else {
+            h = (HolderView) convertView.getTag();
+        };
+        TrainingCourseVO d=(TrainingCourseVO)this.mList.get(position);
+        try{
                 h.title.setText(d.getTitle());
 //                if(Integer.valueOf(2).equals(d.getExercise_mode())){
 //                    h.exercise_mode.setText("马拉松");
@@ -72,7 +72,7 @@ public class MyTrainingCourseAdapter extends DefaultAdapter {
             }
 
             convertView.setTag(h);
-        }
+
         return convertView;
     }
 

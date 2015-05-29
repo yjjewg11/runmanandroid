@@ -219,7 +219,7 @@ public class MyInfoActivity extends BaseActivity {
                 showPopupWindow(view);
                 break;
             case R.id.button_my_traing:
-                mContext.startActivity(new Intent(mContext,CalendarViewMainActivity.class));;
+               // mContext.startActivity(new Intent(mContext,CalendarViewMainActivity.class));;
                 break;
 
 

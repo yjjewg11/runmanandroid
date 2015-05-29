@@ -22,17 +22,13 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/5/28.
  */
-public class TrainingCourseListPublishActivity extends AbstractPullToRefreshListActivity {
+public class TrainingCourseListActivity extends AbstractPullToRefreshListActivity {
 
     @Override
     protected void asyncTaskExecute(Integer operate) {
         new TrainingCourseListPublishAsyncTask(mContext,operate,listView).execute();
     }
 
-    @Override
-    public void initData() {
-
-    }
 
     DefaultAdapter baseListAdapter;
     public  DefaultAdapter getBaseListAdapter(){
@@ -51,12 +47,16 @@ public class TrainingCourseListPublishActivity extends AbstractPullToRefreshList
         return baseListAdapter;
     }
 
-    public  void listViewOnItemClick(TrainingCourseVO vo){
-        new AbstractDetailTrainingCourseAsyncTask(mContext, vo.getId().toString()) {
-            public    void onPostExecute2(TrainingCourseVO vo){
-                IntentUtils.startTrainingCourseDetailActivity(mContext, vo);
-            }
-        }.execute();
+    public  void listViewOnItemClick(Object o){
+        if (o instanceof TrainingCourseVO) {
+
+            new AbstractDetailTrainingCourseAsyncTask(mContext, ((TrainingCourseVO)o).getId().toString()) {
+                public    void onPostExecute2(TrainingCourseVO vo){
+                    IntentUtils.startTrainingCourseDetailActivity(mContext, vo);
+                }
+            }.execute();
+        }
+
     }
 
     public  Integer getCurrActivityLayout(){

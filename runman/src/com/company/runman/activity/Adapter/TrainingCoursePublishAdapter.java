@@ -42,17 +42,17 @@ public class TrainingCoursePublishAdapter extends DefaultAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        HolderView holderView;
-        //优化ListView
-        if(convertView==null){
-            convertView=LayoutInflater.from(context).inflate(R.layout.traininng_course_list_publish_item, null);
-            HolderView h=new HolderView();
-            h.title=(TextView)convertView.findViewById(R.id.title);
-          //  h.exercise_mode=(TextView)convertView.findViewById(R.id.exercise_mode);
-
-            h.price=(TextView)convertView.findViewById(R.id.price);
-//            h.status=(TextView)convertView.findViewById(R.id.status);
-
+        HolderView h;
+        if (convertView == null) {
+            h = new HolderView();
+            convertView = LayoutInflater.from(context).inflate(R.layout.traininng_course_list_publish_item, null);
+            h.title = (TextView) convertView.findViewById(R.id.title);
+            //  h.exercise_mode=(TextView)convertView.findViewById(R.id.exercise_mode);
+            h.price = (TextView) convertView.findViewById(R.id.price);
+            convertView.setTag(h);
+        } else {
+            h = (HolderView) convertView.getTag();
+        };
             TrainingCourseVO d=(TrainingCourseVO)this.mList.get(position);
 
             try{
@@ -71,7 +71,6 @@ public class TrainingCoursePublishAdapter extends DefaultAdapter {
             }
 
             convertView.setTag(h);
-        }
         return convertView;
     }
 

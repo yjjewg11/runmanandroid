@@ -17,6 +17,7 @@ import com.company.runman.utils.GsonUtils;
 import com.company.runman.widget.PullToRefreshListView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -32,11 +33,6 @@ public class CoachListActivity extends AbstractPullToRefreshListActivity {
         setHeaderTitle("教练列表");
     }
 
-    @Override
-    public void initData() {
-
-
-    }
 
     @Override
     public DefaultAdapter getBaseListAdapter() {
@@ -62,9 +58,9 @@ public class CoachListActivity extends AbstractPullToRefreshListActivity {
     }
 
     @Override
-    public void listViewOnItemClick(TrainingCourseVO vo) {
+    public void listViewOnItemClick(Object vo) {
 
-    };
+    }
 
     @Override
     public void onClick(View v) {

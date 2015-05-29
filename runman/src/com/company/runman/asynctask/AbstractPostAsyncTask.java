@@ -1,11 +1,8 @@
 package com.company.runman.asynctask;
 
-import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 import com.company.news.jsonform.AbstractJsonform;
-import com.company.news.vo.TimeScheduleRelationVO;
-import com.company.news.vo.TrainingCourseVO;
 import com.company.runman.activity.base.BaseActivity;
 import com.company.runman.datacenter.model.BaseResultEntity;
 import com.company.runman.net.HttpControl;
@@ -14,39 +11,30 @@ import com.company.runman.net.interfaces.IResponse;
 import com.company.runman.net.request.DefaultRequest;
 import com.company.runman.utils.AbstractAsyncTask;
 import com.company.runman.utils.Constant;
-import com.company.runman.utils.GsonUtils;
 import com.company.runman.utils.TraceUtil;
 import com.company.runman.widget.DialogUtils;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Administrator on 2015/5/28.
  */
-public abstract class AbstractDetailAsyncTask extends AbstractAsyncTask<String, Void, Object> {
-    static String TAG="AbstractSaveAsyncTask";
-    private Object id;
+public abstract class AbstractPostAsyncTask extends AbstractAsyncTask<String, Void, Object> {
+    static String TAG="AbstractPostAsyncTask";
+    private AbstractJsonform form;
     private BaseActivity mContext;
-    private String geturl;
-//    String url = "rest/trainingCourse/{uuid}.json";
-//    url = url.replace("{uuid}", id);
-    protected AbstractDetailAsyncTask(Object id, BaseActivity mContext,String geturl) {
-        this.id = id;
+    private String saveurl;
+    //  String url="rest/trainingCourse/save.json";
+    protected AbstractPostAsyncTask(AbstractJsonform form, BaseActivity mContext, String saveurl) {
+        this.form = form;
         this. mContext=mContext;
-        this.geturl=geturl;
+        this.saveurl=saveurl;
     }
+
 
     @Override
     protected Object doInBackground(String[] params) {
-        String  url = geturl.replace("{uuid}", id.toString());
-        DefaultRequest request= new DefaultRequest(mContext,url, Constant.RequestCode.REQUEST_GET);
-//        request.setData(form);
+        DefaultRequest request= new DefaultRequest(mContext,this.saveurl, Constant.RequestCode.REQUEST_POST);
+        request.setData(form);
         HttpReturn httpReturn = HttpControl.execute(request, mContext);
         IResponse response = new IResponse();
         return response.parseFrom(httpReturn);

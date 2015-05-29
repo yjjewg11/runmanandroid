@@ -45,11 +45,10 @@ public class UserRelationTrainingCourseListAdapter extends DefaultAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        HolderView holderView;
-        //优化ListView
-        if(convertView==null){
+        HolderView h;
+        if (convertView == null) {
+            h = new HolderView();
             convertView=LayoutInflater.from(context).inflate(R.layout.user_relation_training_course_list_item_layout, null);
-            HolderView h=new HolderView();
             h.course_title=(TextView)convertView.findViewById(R.id.course_title);
             h.course_price=(TextView)convertView.findViewById(R.id.course_price);
             h.course_time_length=(TextView)convertView.findViewById(R.id.course_time_length);
@@ -57,6 +56,10 @@ public class UserRelationTrainingCourseListAdapter extends DefaultAdapter {
             h.course_place=(TextView)convertView.findViewById(R.id.course_place);
             h.status=(TextView)convertView.findViewById(R.id.status);
             h.course_time=(TextView)convertView.findViewById(R.id.course_time);
+            convertView.setTag(h);
+        } else {
+            h = (HolderView) convertView.getTag();
+        };
             UserRelationTrainingCourseVO vo=(UserRelationTrainingCourseVO)this.mList.get(position);
             try{
                 h.course_title.setText(Tool.objectToString(vo.getCourse_title()));
@@ -72,7 +75,7 @@ public class UserRelationTrainingCourseListAdapter extends DefaultAdapter {
             }
 
             convertView.setTag(h);
-        }
+
         return convertView;
     }
 

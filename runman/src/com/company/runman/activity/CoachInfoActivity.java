@@ -47,7 +47,7 @@ public class CoachInfoActivity extends BaseActivity {
     private TextView modify_myinfo;
 
 
-    private LinkedList<String> mListItems;
+    //private LinkedList<String> mListItems;
   //  private ListView listView;
     private TrainingPlanAdapter baseListAdapter;
 
@@ -126,7 +126,7 @@ public class CoachInfoActivity extends BaseActivity {
 
         });
 
-        mListItems = new LinkedList<String>();
+        //mListItems = new LinkedList<String>();
        // mListItems.addAll(Arrays.asList(mStrings));
 
         baseListAdapter = new TrainingPlanAdapter(this);
@@ -194,6 +194,7 @@ public class CoachInfoActivity extends BaseActivity {
 
         button_partner_training.setOnClickListener(this);
         findViewById(R.id.button_userRelationTrainingCourse_query_myCourse_sales).setOnClickListener(this);
+        findViewById(R.id.button_queryPublish).setOnClickListener(this);
 
 
 
@@ -204,6 +205,7 @@ public class CoachInfoActivity extends BaseActivity {
 
     @Override
     public void onClick(View view) {
+        String url=null;
         switch (view.getId()) {
             case R.id.modify_myinfo:
                 Intent intent = new Intent(mContext, MyinfoModifyActivity.class);
@@ -215,8 +217,14 @@ public class CoachInfoActivity extends BaseActivity {
             case R.id.button_partner_training:
                //
                 break;
+            case R.id.button_queryPublish:
+                //
+                 url="rest/trainingPlan/query/publish.json";
+                IntentUtils.startTrainingPlanListActivity(mContext,url);
+                break;
+
             case R.id.button_userRelationTrainingCourse_query_myCourse_sales:
-                String url="rest/userRelationTrainingCourse/query/myCourse/sales.json";
+                 url="rest/userRelationTrainingCourse/query/myCourse/sales.json";
                 IntentUtils.startUserRelationTrainingCourseListActivity(mContext,url);
                 break;
             case R.id.button_training_course:
@@ -334,7 +342,7 @@ public class CoachInfoActivity extends BaseActivity {
                 nSearchContion.restPageNo();
             }
           //  nSearchContion .getPsoData().setPageNo(1);
-            String url = "rest/trainingPlan/my.json";
+            String url = "rest/trainingPlan/query/trainer/my.json";
             DefaultRequest request = new DefaultRequest(mContext, url, Constant.RequestCode.REQUEST_GET);
             request.setParaObj(nSearchContion);
             HttpReturn httpReturn = HttpControl.execute(request, mContext);
@@ -348,7 +356,7 @@ public class CoachInfoActivity extends BaseActivity {
 
             if (operate ==Constant.Query.Operate_Refresh ) {
                 // 将字符串“Added after refresh”添加到顶部
-                mListItems.addFirst("下拉刷新");
+                //mListItems.addFirst("下拉刷新");
 
                 SimpleDateFormat format = new SimpleDateFormat(
                         "yyyy-MM-dd-  HH:mm:ss");
@@ -356,7 +364,7 @@ public class CoachInfoActivity extends BaseActivity {
                 // Call onRefreshComplete when the list has been refreshed.
                 listView.onRefreshComplete(date);
             } else if (operate ==Constant.Query.Operate_LoadMore ) {
-                mListItems.addLast("显示更多");
+               // mListItems.addLast("显示更多");
                 listView.onLoadMoreComplete();
             }
 

@@ -114,7 +114,7 @@
                         />
                 <EditText style="@style/RegisterEditTextViewStyle"
                           android:id="@+id/run_times"
-                          android:hint="时间要求（分钟）" android:layout_width="364dp"/>
+                          android:hint="时间要求（分钟）" android:layout_width="364dp" android:inputType="number"/>
             </LinearLayout>
 
 
@@ -150,7 +150,7 @@
                 <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:inputType="number|numberDecimal"
+                        android:inputType="numberDecimal"
                         android:ems="10"
                         android:id="@+id/price" android:editable="true" android:enabled="true" android:text="50"
                         android:hint="出价"/>

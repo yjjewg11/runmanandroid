@@ -6,10 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.CheckBox;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import com.company.news.validate.CommonsValidate;
 import com.company.news.vo.TimeScheduleRelationVO;
 import com.company.news.vo.TrainingCourseVO;
@@ -55,14 +52,15 @@ public class TimesScheduleRelationWeekShowItemAdapter extends DefaultAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
-        HolderView holderView;
-        //优化ListView
-        if(convertView==null){
+        HolderView h;
+        if (convertView == null) {
+            h = new HolderView();
             convertView=LayoutInflater.from(context).inflate(R.layout.times_schedule_relation_week_show_item, null);
-            HolderView h=new HolderView();
             h.textView_start_end_time=(TextView)convertView.findViewById(R.id.textView_start_end_time);
-
+            convertView.setTag(h);
+        } else {
+            h = (HolderView) convertView.getTag();
+        };
             TimeScheduleRelationVO d=(TimeScheduleRelationVO)this.mList.get(position);
 
             try{
@@ -124,7 +122,7 @@ public class TimesScheduleRelationWeekShowItemAdapter extends DefaultAdapter {
             }
 
             convertView.setTag(h);
-        }
+
         return convertView;
     }
 
@@ -168,7 +166,7 @@ public class TimesScheduleRelationWeekShowItemAdapter extends DefaultAdapter {
                 bundle.putSerializable(Constant.ResponseData.Subscribe_Date, week1Cal.getTime() );
                 bundle.putSerializable(Constant.ResponseData.TrainingCourseVO,vo);
                 bundle.putSerializable(Constant.ResponseData.TimeScheduleRelationVO, d );
-
+            bundle.putSerializable("mode", "create" );
                 intent.putExtras(bundle);
             context.startActivity(intent);
         }

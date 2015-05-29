@@ -20,6 +20,7 @@ import com.company.runman.widget.DialogUtils;
 import com.company.runman.widget.PullToRefreshListView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.google.zxing.common.StringUtils;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
@@ -58,6 +59,10 @@ public abstract class AbstractPullToRefreshListAsyncTask extends AbstractAsyncTa
         }else{
             nSearchContion.restPageNo();
         }
+            if(org.apache.commons.lang.StringUtils.isBlank(getQueryUrl())){
+                DialogUtils.alertErrMsg(mContext, "请求URL为空");
+                return null;
+            }
         DefaultRequest request = new DefaultRequest(mContext, getQueryUrl(), Constant.RequestCode.REQUEST_GET);
         request.setParaObj(nSearchContion);
         HttpReturn httpReturn = HttpControl.execute(request, mContext);

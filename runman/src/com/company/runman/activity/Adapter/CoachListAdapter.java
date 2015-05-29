@@ -50,20 +50,20 @@ public class CoachListAdapter extends DefaultAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        HolderView holderView;
-        //优化ListView
-        if(convertView==null){
+        HolderView h;
+        if (convertView == null) {
             convertView=LayoutInflater.from(context).inflate(R.layout.coach_list_item_layout, null);
-            HolderView h=new HolderView();
+
+            h = new HolderView();
             h.name=(TextView)convertView.findViewById(R.id.name);
             h.sex=(TextView)convertView.findViewById(R.id.sex);
 
             h.age=(TextView)convertView.findViewById(R.id.age);
             h.city=(TextView)convertView.findViewById(R.id.city);
-
-           ;
-
-
+            convertView.setTag(h);
+        } else {
+            h = (HolderView) convertView.getTag();
+        }
             UserVO d=(UserVO)this.mList.get(position);
             h.coach_course_list_btn=(Button)convertView.findViewById(R.id.coach_course_list_btn);
             h.coach_course_list_btn.setOnClickListener(new CourseOnClickListener(d.getId()));
@@ -85,7 +85,7 @@ public class CoachListAdapter extends DefaultAdapter {
                 TraceUtil.traceThrowableLog( ex);
             }
             convertView.setTag(h);
-        }
+
         return convertView;
     }
 

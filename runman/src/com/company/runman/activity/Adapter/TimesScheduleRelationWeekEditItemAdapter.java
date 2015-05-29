@@ -50,18 +50,20 @@ public class TimesScheduleRelationWeekEditItemAdapter extends DefaultAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
-        HolderView holderView;
-        //优化ListView
-        if(convertView==null){
+        HolderView h;
+        if (convertView == null) {
             convertView=LayoutInflater.from(context).inflate(R.layout.times_schedule_relation_week_edit_item, null);
-            HolderView h=new HolderView();
+
+            h = new HolderView();
             h.start_time=(EditText)convertView.findViewById(R.id.start_time);
             h.end_time=(EditText)convertView.findViewById(R.id.end_time);
             DialogUtils.showTimeDialogBind( h.start_time);
             DialogUtils.showTimeDialogBind(  h.end_time);
-            TimeScheduleRelationVO d=(TimeScheduleRelationVO)this.mList.get(position);
-
+            convertView.setTag(h);
+        } else {
+            h = (HolderView) convertView.getTag();
+        };
+        TimeScheduleRelationVO d=(TimeScheduleRelationVO)this.mList.get(position);
             try{
                 h.start_time.setText(Tool.objectToString(d.getStart_time()));
                 h.end_time.setText(Tool.objectToString(d.getEnd_time()));
@@ -104,7 +106,7 @@ public class TimesScheduleRelationWeekEditItemAdapter extends DefaultAdapter {
             }
 
             convertView.setTag(h);
-        }
+
         return convertView;
     }
 
