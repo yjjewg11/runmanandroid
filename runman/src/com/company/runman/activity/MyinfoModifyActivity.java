@@ -24,6 +24,7 @@ import com.company.news.vo.TrainingPlanVO;
 import com.company.news.vo.UserInfoReturn;
 import com.company.runman.R;
 import com.company.runman.activity.base.BaseActivity;
+import com.company.runman.asynctask.UploadImgBitmapAsyncTask;
 import com.company.runman.cache.ImgDownCache;
 import com.company.runman.datacenter.model.BaseResultEntity;
 import com.company.runman.datacenter.provider.SharePreferenceProvider;
@@ -125,7 +126,30 @@ public class MyinfoModifyActivity extends BaseActivity {
 
                         if (file != null) {
                             showProgress(getString(R.string.progress_text));
-                            new UploadMyheadImgAsyncTask(file).execute("");
+                            Bitmap bitmap = BitmapFactory.decodeStream(cr
+                                    .openInputStream(uri));
+                            imageView_myhead.setImageBitmap(bitmap);
+                            String url="rest/uploadFile/uploadMyheadImg.json";
+                            new UploadImgBitmapAsyncTask(bitmap,MyinfoModifyActivity.this,url){
+                                @Override
+                                protected void onPostExecute2(JSONObject jsonObject) {
+                                    //   SharePreferenceProvider.getInstance(mContext).setUserinfo(jsonObject.optString(Constant.SharePreferenceKey.Userinfo));
+                                    try {
+                                        String imgurl=jsonObject.getString("imgurl");
+                                        String userinfoStr = SharePreferenceProvider.getInstance(mContext).getUserinfo();
+                                        UserInfoReturn user=(UserInfoReturn)new GsonUtils().stringToObject(userinfoStr, UserInfoReturn.class);
+                                        user.setIdentity_card_imgurl(imgurl);
+                                        userinfoStr=new GsonUtils().toJson(user);
+                                        SharePreferenceProvider.getInstance(mContext).setUserinfo(userinfoStr);
+                                        if(!TextUtils.isEmpty(imgurl)) {
+                                            ImgDownCache.getInstance(mContext).displayImage(Tool.getFullImgUrl(imgurl), imageView_myhead);
+                                        }
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }.execute();
                         }
                         Bitmap bitmap = BitmapFactory.decodeStream(cr
                                 .openInputStream(uri));

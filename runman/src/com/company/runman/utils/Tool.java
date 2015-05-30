@@ -79,6 +79,19 @@ public final class Tool {
      * 传入url，如果是相对路径，则加载配置的服务器地址返回，完整url
      * @param url
      * @return
+     * 解决：
+     * Image can't be decoded [http://120.25.127.141/runman-rest/rest/uploadFile/getImgFile.json?guid=8af409254d9ea372014da35b3e4b000f_400x400]
+     */
+    public static String getFullImgUrl(String url){
+        if(url.indexOf("http://")==-1&&url.indexOf("https://")==-1){
+            return   Constant.Host.BASE_HOST+url+"&";
+        }
+        return url+"&";
+    }
+    /**
+     * 传入url，如果是相对路径，则加载配置的服务器地址返回，完整url
+     * @param url
+     * @return
      */
     public static String getFullUrl(String url){
         if(url.indexOf("http://")==-1&&url.indexOf("https://")==-1){

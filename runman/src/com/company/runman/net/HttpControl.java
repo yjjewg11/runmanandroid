@@ -1,6 +1,7 @@
 package com.company.runman.net;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import com.company.runman.net.interfaces.IRequest;
 import com.company.runman.utils.Constant;
 import com.company.runman.utils.LogHelper;
@@ -13,7 +14,20 @@ import java.io.File;
  * Created by Edison on 2014/6/6.
  */
 public class HttpControl {
+    public static HttpReturn execute(Bitmap bitmap, String url) {
+        TraceUtil.traceLog(url);
+        HttpReturn ret = new HttpReturn();
+        try {
+            ret= NetworkHttpRequest.uploadFileByBitmap(bitmap,url);
+        } catch (Exception e) {
+            TraceUtil.traceThrowableLog(e);
+            e.printStackTrace();
+            ret.code = Constant.ResponseCode.TIMEOUT;
+            ret.err = e.getMessage();
+        }
 
+        return ret;
+    }
     public static HttpReturn execute(File file, String RequestURL) {
         TraceUtil.traceLog(RequestURL);
         HttpReturn ret = new HttpReturn();
@@ -66,4 +80,6 @@ public class HttpControl {
         }
         return ret;
     }
+
+
 }

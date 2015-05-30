@@ -29,8 +29,11 @@ static ImageLoader imageLoader=null;
         File cacheDir = StorageUtils.getCacheDirectory(context);
         if(imageLoader==null){
             ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
-                    .memoryCacheExtraOptions(480, 800) // default = device screen dimensions
-                    .diskCacheExtraOptions(480, 800, null)
+//                    .showImageOnLoading(R.drawable.loading) //设置图片在下载期间显示的图片
+//                    .showImageForEmptyUri(R.drawable.loading)//设置图片Uri为空或是错误的时候显示的图片
+//                    .showImageOnFail(R.drawable.loading)  //设置图片加载/解码过程中错误时候显示的图片
+//                    //.memoryCacheExtraOptions(480, 800) // default = device screen dimensions
+//                    .diskCacheExtraOptions(480, 800, null)
                     .threadPriority(Thread.NORM_PRIORITY - 2) // default
                     .tasksProcessingOrder(QueueProcessingType.FIFO) // default
                     .denyCacheImageMultipleSizesInMemory()

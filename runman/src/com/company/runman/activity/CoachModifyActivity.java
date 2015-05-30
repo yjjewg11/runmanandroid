@@ -17,6 +17,7 @@ import com.company.news.jsonform.UserModifyJsonform;
 import com.company.news.vo.UserInfoReturn;
 import com.company.runman.R;
 import com.company.runman.activity.base.BaseActivity;
+import com.company.runman.asynctask.UploadImgBitmapAsyncTask;
 import com.company.runman.cache.ImgDownCache;
 import com.company.runman.datacenter.model.BaseResultEntity;
 import com.company.runman.datacenter.provider.SharePreferenceProvider;
@@ -87,10 +88,10 @@ public class CoachModifyActivity extends BaseActivity {
         birth.setText(Tool.objectToString(TimeUtils.getDateString(vo.getBirth())));
         context.setText(Tool.objectToString(vo.getContext()));
         if(!TextUtils.isEmpty(vo.getIdentity_card_imgurl())) {
-            ImgDownCache.getInstance(mContext).displayImage(Tool.getFullUrl(vo.getIdentity_card_imgurl()), imageView_identity_card_imgurl);
+            ImgDownCache.getInstance(mContext).displayImage(Tool.getFullImgUrl(vo.getIdentity_card_imgurl()), imageView_identity_card_imgurl);
         }
         if(!TextUtils.isEmpty(vo.getMarathon_imgurl())) {
-            ImgDownCache.getInstance(mContext).displayImage(Tool.getFullUrl(vo.getMarathon_imgurl()), imageView_MarathonImg);
+            ImgDownCache.getInstance(mContext).displayImage(Tool.getFullImgUrl(vo.getMarathon_imgurl()), imageView_MarathonImg);
         }
 
 
@@ -126,19 +127,60 @@ public class CoachModifyActivity extends BaseActivity {
                         if(Upload_file_type_identity_card.equals(upload_file_flag)){
                             if (file != null) {
                                 showProgress(getString(R.string.progress_text));
-                                new UploadIdentityCardImgAsyncTask(file).execute("");
+                                Bitmap bitmap = BitmapFactory.decodeStream(cr
+                                        .openInputStream(uri));
+                                imageView_identity_card_imgurl.setImageBitmap(bitmap);
+                                String url="rest/uploadFile/uploadIdentityCardImg.json";
+                                new UploadImgBitmapAsyncTask(bitmap,CoachModifyActivity.this,url){
+                                    @Override
+                                    protected void onPostExecute2(JSONObject jsonObject) {
+                                        //   SharePreferenceProvider.getInstance(mContext).setUserinfo(jsonObject.optString(Constant.SharePreferenceKey.Userinfo));
+                                        try {
+                                            String imgurl=jsonObject.getString("imgurl");
+                                            String userinfoStr = SharePreferenceProvider.getInstance(mContext).getUserinfo();
+                                            UserInfoReturn user=(UserInfoReturn)new GsonUtils().stringToObject(userinfoStr, UserInfoReturn.class);
+                                            user.setIdentity_card_imgurl(imgurl);
+                                            userinfoStr=new GsonUtils().toJson(user);
+                                            SharePreferenceProvider.getInstance(mContext).setUserinfo(userinfoStr);
+                                            if(!TextUtils.isEmpty(imgurl)) {
+                                                ImgDownCache.getInstance(mContext).displayImage(Tool.getFullUrl(imgurl), imageView_identity_card_imgurl);
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }.execute();
+//                                new UploadIdentityCardImgAsyncTask(file).execute("");
                             }
-                            Bitmap bitmap = BitmapFactory.decodeStream(cr
-                                    .openInputStream(uri));
-                            imageView_identity_card_imgurl.setImageBitmap(bitmap);
+
                         }else  if(Upload_file_type_Marathon.equals(upload_file_flag)){
                             if (file != null) {
                                 showProgress(getString(R.string.progress_text));
-                                new UploadIdentityCardImgAsyncTask(file).execute("");
+                                Bitmap bitmap = BitmapFactory.decodeStream(cr
+                                        .openInputStream(uri));
+                                imageView_MarathonImg.setImageBitmap(bitmap);
+                                String url = "rest/uploadFile/uploadMarathonImg.json";
+                                new UploadImgBitmapAsyncTask(bitmap,CoachModifyActivity.this,url){
+                                    @Override
+                                    protected void onPostExecute2(JSONObject jsonObject) {
+                                        //   SharePreferenceProvider.getInstance(mContext).setUserinfo(jsonObject.optString(Constant.SharePreferenceKey.Userinfo));
+                                        try {
+                                            String imgurl=jsonObject.getString("imgurl");
+                                            String userinfoStr = SharePreferenceProvider.getInstance(mContext).getUserinfo();
+                                            UserInfoReturn user=(UserInfoReturn)new GsonUtils().stringToObject(userinfoStr, UserInfoReturn.class);
+                                            user.setIdentity_card_imgurl(imgurl);
+                                            userinfoStr=new GsonUtils().toJson(user);
+                                            SharePreferenceProvider.getInstance(mContext).setUserinfo(userinfoStr);
+                                            if(!TextUtils.isEmpty(imgurl)) {
+                                                ImgDownCache.getInstance(mContext).displayImage(Tool.getFullUrl(imgurl), imageView_MarathonImg);
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }.execute();
                             }
-                            Bitmap bitmap = BitmapFactory.decodeStream(cr
-                                    .openInputStream(uri));
-                            imageView_MarathonImg.setImageBitmap(bitmap);
+
                         }else{
                             Toast.makeText(mContext,"上传图片类型不对，type="+upload_file_flag, Toast.LENGTH_SHORT).show();
                         }
@@ -300,121 +342,4 @@ public class CoachModifyActivity extends BaseActivity {
         }
     }
 
-    private class UploadIdentityCardImgAsyncTask extends AbstractAsyncTask<String, Void, Object> {
-
-        private File  form;
-
-        protected UploadIdentityCardImgAsyncTask(File form) {
-            this.form = form;
-        }
-
-        @Override
-        protected Object doInBackground(String[] params) {
-            String url="rest/uploadFile/uploadIdentityCardImg.json";
-            DefaultRequest request= new DefaultRequest(mContext,url,Constant.RequestCode.REQUEST_POST);
-            HttpReturn httpReturn = HttpControl.execute(form,request.getUrl());
-
-            IResponse response = new IResponse();
-            return response.parseFrom(httpReturn);
-            //保存是否保存密码的选项
-           // return CategoryDataProvider.getInstance().register(mContext, form);
-        }
-
-        @Override
-        protected void onPostExecute(Object result) {
-            dismissProgress();
-            super.onPostExecute(result);
-            if(result == null) {
-                DialogUtils.alertErrMsg(mContext,"服务器未知错误!");
-            } else {
-                BaseResultEntity responseEntity = (BaseResultEntity) result;
-
-                if (Constant.ResponseData.STATUS_SUCCESS.equals(responseEntity.getStatus()) ){
-
-                    JSONObject jsonObject = (JSONObject) responseEntity.getResultObject();
-                 //   SharePreferenceProvider.getInstance(mContext).setUserinfo(jsonObject.optString(Constant.SharePreferenceKey.Userinfo));
-                    try {
-                        String imgurl=jsonObject.getString("imgurl");
-                        String userinfoStr = SharePreferenceProvider.getInstance(mContext).getUserinfo();
-                        UserInfoReturn user=(UserInfoReturn)new GsonUtils().stringToObject(userinfoStr, UserInfoReturn.class);
-                        user.setIdentity_card_imgurl(imgurl);
-                        userinfoStr=new GsonUtils().toJson(user);
-                        SharePreferenceProvider.getInstance(mContext).setUserinfo(userinfoStr);
-                        if(!TextUtils.isEmpty(imgurl)) {
-                            ImgDownCache.getInstance(mContext).displayImage(Tool.getFullUrl(imgurl), imageView_identity_card_imgurl);
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-
-                    Toast.makeText(mContext, responseEntity.getResultMsg(), Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(mContext, MyInfoActivity.class);
-//                    startActivity(intent);
-//                    finish();
-                }else{
-                    DialogUtils.alertErrMsg(mContext,responseEntity.getResultMsg());
-                }
-            }
-        }
-    }
-
-
-    private class UploadMarathonImgAsyncTask extends AbstractAsyncTask<String, Void, Object> {
-        private File form;
-
-        protected UploadMarathonImgAsyncTask(File form) {
-            this.form = form;
-        }
-
-        @Override
-        protected Object doInBackground(String[] params) {
-            String url = "rest/uploadFile/uploadMarathonImg.json";
-            DefaultRequest request = new DefaultRequest(mContext, url, Constant.RequestCode.REQUEST_POST);
-            HttpReturn httpReturn = HttpControl.execute(form, request.getUrl());
-
-            IResponse response = new IResponse();
-            return response.parseFrom(httpReturn);
-            //保存是否保存密码的选项
-            // return CategoryDataProvider.getInstance().register(mContext, form);
-        }
-
-        @Override
-        protected void onPostExecute(Object result) {
-            dismissProgress();
-            super.onPostExecute(result);
-            if (result == null) {
-                DialogUtils.alertErrMsg(mContext, "服务器未知错误!");
-            } else {
-                BaseResultEntity responseEntity = (BaseResultEntity) result;
-
-                if (Constant.ResponseData.STATUS_SUCCESS.equals(responseEntity.getStatus())) {
-
-                    JSONObject jsonObject = (JSONObject) responseEntity.getResultObject();
-                    //   SharePreferenceProvider.getInstance(mContext).setUserinfo(jsonObject.optString(Constant.SharePreferenceKey.Userinfo));
-                    try {
-                        String imgurl = jsonObject.getString("imgurl");
-                        String userinfoStr = SharePreferenceProvider.getInstance(mContext).getUserinfo();
-                        UserInfoReturn user = (UserInfoReturn) new GsonUtils().stringToObject(userinfoStr, UserInfoReturn.class);
-                        user.setMarathon_imgurl(imgurl);
-                        userinfoStr = new GsonUtils().toJson(user);
-                        SharePreferenceProvider.getInstance(mContext).setUserinfo(userinfoStr);
-                        if (!TextUtils.isEmpty(imgurl)) {
-                            ImgDownCache.getInstance(mContext).displayImage(Tool.getFullUrl(imgurl), imageView_MarathonImg);
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-
-                    Toast.makeText(mContext, responseEntity.getResultMsg(), Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(mContext, MyInfoActivity.class);
-//                    startActivity(intent);
-//                    finish();
-                } else {
-                    DialogUtils.alertErrMsg(mContext, responseEntity.getResultMsg());
-                }
-            }
-        }
-    }
 }

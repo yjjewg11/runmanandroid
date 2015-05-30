@@ -47,7 +47,7 @@ public class TrainingCourseEditActivity extends BaseActivity {
 //    private RadioButton exercise_mode2;
     private EditText title;
     private EditText time_length;
-    private EditText difficulty_degree;
+    private RatingBar difficulty_degree;
     private EditText place;
     private EditText context;
     private EditText price;
@@ -73,6 +73,7 @@ public class TrainingCourseEditActivity extends BaseActivity {
             vo=new TrainingCourseVO();
           
             vo.setExercise_mode(1);
+            vo.setDifficulty_degree(1);
         }else{
             form=new TrainingCourseJsonform();
             form.setId(vo.getId());
@@ -85,7 +86,8 @@ public class TrainingCourseEditActivity extends BaseActivity {
         title.setText(Tool.objectToString(vo.getTitle()));
         time_length.setText(Tool.objectToString(vo.getTime_length()));
         price.setText(Tool.objectToString(vo.getPrice()));
-        difficulty_degree.setText(Tool.objectToString(vo.getDifficulty_degree()));
+        difficulty_degree.setRating(vo.getDifficulty_degree());
+      //  difficulty_degree.setText(Tool.objectToString(vo.getDifficulty_degree()));
        place.setText(Tool.objectToString(vo.getPlace()));
         context.setText(Tool.objectToString(vo.getContext()));
 
@@ -107,7 +109,23 @@ public class TrainingCourseEditActivity extends BaseActivity {
         setContentView(R.layout.training_course_edit_layout);
 //        exercise_mode1 = (RadioButton) findViewById(R.id.exercise_mode1);
 //        exercise_mode2 = (RadioButton) findViewById(R.id.exercise_mode2);
-        difficulty_degree = (EditText) findViewById(R.id.difficulty_degree);
+        difficulty_degree = (RatingBar) findViewById(R.id.difficulty_degree);
+        //滑块的星形数量
+        difficulty_degree.setNumStars(5);
+        //设置最大值
+        difficulty_degree.setMax(5);
+        //设置分数
+        //difficulty_degree.setRating((float) 1.5);
+        //设置每次更改的最小长度
+        difficulty_degree.setStepSize(1);
+        //设置监听器
+//        bar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
+//
+//            @Override
+//            public void onRatingChanged(RatingBar arg0, float arg1, boolean arg2) {
+//                Toast.makeText(MainActivity.this,"" + arg1*20, Toast.LENGTH_SHORT).show();
+//            }
+//        });
         context = (EditText) findViewById(R.id.context);
 
 
@@ -171,7 +189,7 @@ public class TrainingCourseEditActivity extends BaseActivity {
 
                 form.setTitle(title.getText().toString());
                 form.setTime_length(Tool.convertInteger(time_length.getText().toString()));
-                form.setDifficulty_degree(Tool.convertInteger(difficulty_degree.getText().toString()));
+                form.setDifficulty_degree((int)difficulty_degree.getRating());
                 form.setContext(context.getText().toString());
             form.setPlace(place.getText().toString());
             if(!TextUtils.isEmpty(price.getText())){

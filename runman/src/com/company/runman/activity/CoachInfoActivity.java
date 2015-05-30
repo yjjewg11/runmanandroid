@@ -146,7 +146,7 @@ public class CoachInfoActivity extends BaseActivity {
             name.setText(user.getName());
             myinfo_detail.setText(user.getSex()==1?"女":"男"+" "+user.getCity());
             if(!TextUtils.isEmpty(user.getHead_imgurl())) {
-                ImgDownCache.getInstance(mContext).displayImage(Tool.getFullUrl(user.getHead_imgurl()), imageView_myhead);
+                ImgDownCache.getInstance(mContext).displayImage(Tool.getFullImgUrl(user.getHead_imgurl()), imageView_myhead);
             }
         } catch (Exception e) {
             TraceUtil.traceThrowableLog(e);

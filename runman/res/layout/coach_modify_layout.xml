@@ -80,7 +80,7 @@
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent">
+                    android:layout_height="wrap_content">
                 <TextView
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
@@ -113,8 +113,10 @@
                         android:id="@+id/context" android:hint="300字以内"/>
             </LinearLayout>
             <ImageView
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:scaleType="centerInside"
+                    android:maxWidth="150dp" android:minHeight="150dp"
                     android:id="@+id/imageView_identity_card_imgurl" android:layout_gravity="center_horizontal"/>
 
             <Button
@@ -125,8 +127,10 @@
 
 
             <ImageView
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:scaleType="centerInside"
+                    android:maxWidth="150dp" android:minHeight="150dp"
                     android:id="@+id/imageView_MarathonImg" android:layout_gravity="center_horizontal"/>
             <Button
                     android:layout_width="wrap_content"

@@ -68,9 +68,12 @@
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:text="课程难度"
                         />
-                <EditText style="@style/RegisterEditTextViewStyle"
-                          android:id="@+id/difficulty_degree"
-                          android:hint="1-5数字" android:layout_width="364dp" android:inputType="number"/>
+                <RatingBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/difficulty_degree"
+                        style="@android:style/Widget.DeviceDefault.Light.RatingBar" android:stepSize="1"/>
+
 
 
             </LinearLayout>
